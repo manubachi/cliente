@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 4</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            pregunta1.onclick = muestra;
+            pregunta2.onclick = muestra;
+            pregunta3.onclick = muestra;
+        }
+
+        function muestra(e) {
+            var preguntas = document.getElementsByName('p');
+            let respuestas = document.getElementsByName('r');
+            for (var i = 0; i < preguntas.length; i++) {
+                respuestas[i].style.display = 'none'
+            }
+
+            for (var i = 0; i < preguntas.length; i++) {
+                if (preguntas[i] == e.target) {
+                    respuestas[i].style.display = 'block'
+                    preguntas[i].style.color = 'red';
+                }
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Listado de FAQs</h2>
+    <div id="pregunta1">
+        <h3 name="p" style="color:blue">Pregunta 1</h3>
+    </div>
+    <div id="respuesta1" name="r" style="display:none">
+        <p>Respuesta 1</p>
+    </div>
+
+    <div id="pregunta2">
+        <h3 name="p" style="color:blue">Pregunta 2</h3>
+    </div>
+    <div id="respuesta2" name="r" style="display:none">
+        <p>Respuesta 2</p>
+    </div>
+
+    <div id="pregunta3">
+        <h3 name="p" style="color:blue" >Pregunta 3</h3>
+    </div>
+    <div id="respuesta3" name="r" style="display:none">
+        <p>Respuesta 3</p>
+    </div>
+</body>
+
+</html>

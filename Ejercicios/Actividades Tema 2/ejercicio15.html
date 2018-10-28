@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 15</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var frase=prompt("Introduce una frase: ", "");
+		   	var frase1="";
+		   	frase=frase.replace(/\s/g,"");
+		   	if(isNaN(frase)){
+		   		for(i=frase.length-1;i>=0;i--){
+		        	frase1 += frase.charAt(i);
+		        }
+		    }else{
+		    	alert("Debes introducir una frase");
+		    }
+		    alert(frase1);
+		    if(frase == frase1){
+		    	alert("La frase que has introducido es un palíndromo");
+		    }else{
+		    	alert("La frase que has introducido no es un palíndromo");
+		    }
+
+		</script>
+	</body>
+</html>

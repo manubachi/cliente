@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+
+        function alerta(){
+            alert('¡Prueba superada!');
+        }
+
+        function alerta_2(nombre, e){
+            alert('¡Prueba superada! ' + ' parámetro: ' + nombre + ' tipo de evento: ' +  e.type);
+            zona_interactiva_2.removeEventListener('click',alertaConParametros);
+        }
+
+        alertaConParametros = function (e){alerta_2('Pepe',e)}; //definir una función externa para poder eliminarla posteriormente
+
+        window.onload = function (){
+            zona_interactiva.addEventListener('click', alerta);
+            zona_interactiva_2.addEventListener('click', alertaConParametros);
+            
+        }
+        
+       
+    </script>
+</head>
+<body>
+	
+	<p>Este ejemplo es igual al anterior, salvo que ahora tengo dos div interactivos. El primero lanzará la alerta siempre que se haga clic sobre él:</p>
+    <div id="zona_interactiva" style="border:2px solid black;">
+        <p>Haga clic en este elemento para lanzar la alerta</p>
+    </div>
+    <p>mientras que el segundo sólo la primera vez:</p>
+    <div id="zona_interactiva_2" style="border:2px solid black;">
+        <p>Haga clic en este elemento para lanzar la alerta<br />(sólo funcionará una vez)</p>
+    </div>
+	
+</body>
+</html>

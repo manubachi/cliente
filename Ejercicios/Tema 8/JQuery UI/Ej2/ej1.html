@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<script src="jquery-ui.js"></script>
+	<style>
+	  #sortable {  margin: 0; padding: 0; width: 550px; }
+	  #sortable li { list-style: none; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; border:1px solid; }
+
+	  .oculto {visibility: hidden;}
+  	</style>
+
+	
+</head>
+<body>
+	<ul id="sortable">
+	  <li class="ui-state-default"><span>U</span></li>
+	  <li class="ui-state-default"><span>O</span></li>
+	  <li class="ui-state-default"><span>I</span></li>
+	  <li class="ui-state-default"><span>E</span></li>
+	  <li class="ui-state-default"><span>A</span></li>
+	  
+	</ul>
+	<button>Comprobar</button>
+
+	
+</body>
+	<script type="text/javascript">
+		var orden = ['A','E','I','O','U'];
+		var respuesta = [];
+		var aciertos = 0;
+		$(document).ready(function() {
+			$( "#sortable" ).sortable();
+    		$( "#sortable" ).disableSelection();
+			$('span').addClass('oculto');
+
+			$('button').on('click', function(e) {
+				e.preventDefault();
+				while(respuesta.length > 0){
+  					respuesta.pop(); 
+				}
+				aciertos = 0;
+				respuesta.push($('span:eq(0)').text());
+				respuesta.push($('span:eq(1)').text());
+				respuesta.push($('span:eq(2)').text());
+				respuesta.push($('span:eq(3)').text());
+				respuesta.push($('span:eq(4)').text());
+
+				for (x=0;x<orden.length;x++) 
+				{ 
+					if (orden[x] == respuesta[x]) 
+					{ 
+						aciertos++;
+					} 
+				} 
+
+				if (aciertos == 5) {
+					alert('Has ganado!!')
+					$('span').removeClass('oculto');
+					$('button').off('click');
+				}else{
+					alert('Sigue intentándolo');
+				}
+			});
+		});
+	</script>
+</html>

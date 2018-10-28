@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 19</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var expresion_regular_hora = /^\d{2}\:\d{2}$/;
+
+			var hora = prompt("Introduce una hora: ");
+
+			if(expresion_regular_hora.test(hora) == false)
+				alert("La hora introducida no está en un formato valido");
+			else
+				alert("La hora introducida es válida");
+
+		</script>
+		   	
+	</body>
+</html>

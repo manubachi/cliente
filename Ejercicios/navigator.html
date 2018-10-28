@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Navigator</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var plugins = navigator.plugins;
+			var mostrar= ""
+			var x;
+
+			document.write("Plugins:<br>");
+			for (i = 0; i < plugins.length; i++)
+			{
+				for (x in plugins[i])
+				{
+					document.write("<br><b>"+ x + ":</b> " + plugins[i][x]+"<br>");
+				}
+				 document.write("<hr/>");
+			}
+
+
+
+
+
+
+
+
+		</script>
+
+	</body>
+</html>

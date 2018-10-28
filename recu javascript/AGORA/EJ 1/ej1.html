@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="cookies.js" charset="utf-8"></script>
+		<style type="text/css">
+
+			.tabla{
+				border:2px solid;
+				text-align: center;
+				width: 300px;
+				height: 300px;
+				font-size: 40px;
+				margin: 20px 0px;
+			}
+
+			.blanco{
+				background-color: white;
+			}
+
+			.rojo {
+				background-color:red;
+			}
+
+		</style>
+
+	</head>
+	<body>
+
+		<div id='juego'>
+			<div id='tablero'></div>
+			<div id='botones'></div>
+			<div id='resultado'></div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var nombre;
+		var tabla;
+		window.onload = function() {
+			nombre = prompt('Introduzca su nombre: ')
+
+			if (getCookie(nombre)) {
+				let valor =parseInt(getCookie(nombre));
+				setCookie(nombre,++valor);
+			}else {
+				setCookie(nombre,1);
+			}
+			let parr = document.createElement('p');
+			let text = document.createTextNode('Usuario: ' + nombre + ' Nº de partidas: '+ getCookie(nombre));
+			parr.appendChild(text);
+			juego.insertBefore(parr,juego.childNodes[0]);
+			crearTabla();
+		}
+
+		function crearTabla(){
+			tabla = document.createElement('table');
+			tabla.setAttribute('class', 'tabla');
+			let numeros = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+            for (var i = 0; i < 4; i++) {
+                let f = tabla.insertRow();
+                for (let j = 0; j < 4; j++) {
+                    let c = f.insertCell();
+					let numAl = Math.floor(Math.random()*((numeros.length-1)-(0-1)));
+					let numeroElegido = numeros[numAl];
+					numeros.splice(numAl,1);
+                    c.appendChild(document.createTextNode(numeroElegido));
+					c.setAttribute('id', numeroElegido);
+					c.setAttribute('class', 'blanco');
+					c.addEventListener('click', function(e) {
+						if(e.target == c){
+							c.setAttribute('class', 'rojo');
+						}
+					})
+                }
+			}
+			tablero.appendChild(tabla);
+			crearBotones();
+		}
+
+		function crearBotones(){
+			let limpiar = document.createElement('button');
+			limpiar.textContent = 'Limpiar';
+			limpiar.setAttribute('id', 'btnlimpiar');
+			botones.appendChild(limpiar);
+
+
+			let rojo = document.createElement('button');
+			rojo.setAttribute('id','btnrojo');
+			rojo.textContent = 'Rojo';
+			//rojo.addEventListener('click', haceRojo);
+			botones.appendChild(rojo);
+
+			let borrar = document.createElement('button');
+			borrar.setAttribute('id', 'btnborrar');
+			borrar.textContent = 'Borrar';
+			//borrar.addEventListener('click', borra);
+			botones.appendChild(borrar);
+
+			let ajedrez = document.createElement('button');
+			ajedrez.setAttribute('id', 'btnajedrez');
+			ajedrez.textContent = 'Ajedrez';
+			botones.appendChild(ajedrez);
+
+
+			let blancas = document.createElement('button');
+			blancas.setAttribute('id', 'btnblancas');
+			blancas.textContent = 'Sumar blancas';
+			botones.appendChild(blancas);
+
+			let rojas = document.createElement('button');
+			rojas.setAttribute('id', 'btnrojas');
+			rojas.textContent = 'Sumar Rojas';
+			botones.appendChild(rojas);
+
+			crearEventos();
+		}
+
+		function crearEventos(){
+			btnlimpiar.addEventListener('click', limpia);
+			btnajedrez.addEventListener('click', haceAjedrez);
+			btnblancas.addEventListener('click', sumaBlancas);
+			btnrojas.addEventListener('click', sumaRojas);
+		}
+
+		function limpia() {
+			let rojos = document.getElementsByClassName('rojo');
+			for (let r of rojos) {
+				r.setAttribute('class', 'blanco');
+				limpia();
+			}
+		}
+
+		function haceAjedrez() {
+			limpia();
+			tabla.childNodes[0].childNodes[0].childNodes[0].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[0].childNodes[2].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[1].childNodes[1].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[1].childNodes[3].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[2].childNodes[0].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[2].childNodes[2].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[3].childNodes[1].setAttribute('class', 'rojo');
+			tabla.childNodes[0].childNodes[3].childNodes[3].setAttribute('class', 'rojo');
+		}
+
+		function sumaBlancas(){
+			if (resultado.childElementCount == 0) {
+				let blancos = document.getElementsByClassName('blanco');
+				let parrafo = document.createElement('p');
+				let res = document.createTextNode('El resultado de las celdas color blanco es : ' + blancos.length);
+				parrafo.appendChild(res);
+				resultado.appendChild(parrafo);
+			}else {
+				resultado.removeChild(resultado.childNodes[0]);
+				sumaBlancas();
+			}
+
+
+		}
+
+		function sumaRojas(){
+			if (resultado.childElementCount == 0) {
+				let rojos = document.getElementsByClassName('rojo');
+				let parrafo = document.createElement('p');
+				let res = document.createTextNode('El resultado de las celdas color rojo es : ' + rojos.length);
+				parrafo.appendChild(res);
+				resultado.appendChild(parrafo);
+			}else {
+				resultado.removeChild(resultado.childNodes[0]);
+				sumaRojas();
+			}
+		}
+
+	</script>
+</html>

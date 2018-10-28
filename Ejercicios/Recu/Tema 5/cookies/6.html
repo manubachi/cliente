@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="cookies.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <h1>¿Qué sistema operativo de móvil te gusta más?</h1>
+        <input type="radio" name="so" value="android">Android
+        <br>
+        <input type="radio" name="so" value="ios">iOS
+        <br>
+        <input type="radio" name="so" value="windows">Windows Phone
+        <br>
+        <input type="radio" name="so" value="otro">Otro
+        <br>
+        <br>
+
+        <input type="button" id="votar" value="Votar">
+        <br>
+        <br>
+        <br>
+
+        <div>
+            <meter value="0" min="0" max="100" id="android"></meter>Android
+            <br>
+            <meter value="0" min="0" max="100" id="ios"></meter>iOS
+            <br>
+            <meter value="0" min="0" max="100" id="windows"></meter>Windows Phone
+            <br>
+            <meter value="0" min="0" max="100" id="otro"></meter>Otro
+        </div>
+
+    </body>
+
+    <script type="text/javascript">
+        var caduca = new Date(2018,12,31);
+        var so = document.getElementsByName('so');
+        var meters = document.getElementsByTagName('meter')
+        window.onload = function() {
+            votar.addEventListener('click', suma)
+            for (met of meters) {
+                met.value = getCookie(met.id);
+            }
+        }
+
+        function suma() {
+            for (s of so) {
+                if (s.checked) {
+                    if (!(getCookie(s.value))) {
+                        setCookie(s.value,0,caduca);
+
+                    }else{
+                        let valor = getCookie(s.value);
+                        setCookie(s.value,++valor,caduca);
+                    }
+                }
+            }
+
+            for (met of meters) {
+                met.value = getCookie(met.id);
+            }
+        }
+    </script>
+</html>

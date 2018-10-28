@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 4</title>
+        <script src="limpiarCodigo.js" charset="utf-8"></script>
+        <style media="screen">
+            a{
+                color:blue;
+            }
+
+            .visitado{
+                color:#FF0000;
+            }
+
+            p{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Listado de FAQs</h1>
+
+        <div>
+            <a href="#" name="p" id="1">Pregunta 1</a>
+            <p id="respuesta1" name='1'>Respuesta 1</p>
+        </div>
+
+        <div>
+
+            <a href="#" name="p" id="2">Pregunta 2</a>
+            <p id="respuesta2" name='2'>Respuesta 2</p>
+        </div>
+        <div>
+            <a href="#" name="p" id="3">Pregunta 3</a>
+            <p id="respuesta3" name='3'>Respuesta 3</p>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var preguntas = document.getElementsByName('p');
+        var respuestas = document.getElementsByTagName('p');
+        window.onload = function() {
+            buscar();
+            for (pre of preguntas) {
+                pre.addEventListener('click',muestra);
+            }
+
+        }
+
+        function ocultar() {
+            for (re of respuestas) {
+                re.style.display = 'none';
+            }
+        }
+
+        function muestra(e){
+            ocultar();
+
+            document.getElementsByName(e.target.id)[0].style.display = 'block'
+            document.getElementById(e.target.id).setAttribute('class','visitado');
+
+            /*for (pre of preguntas) {
+                pre.nextSibling.style.display = 'none';
+            }
+            for (pre of preguntas) {
+                if (pre == e.target) {
+                    pre.nextSibling.style.display = 'block';
+                    pre.style.color = 'red'
+                }
+            }*/
+        }
+    </script>
+</html>

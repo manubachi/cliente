@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Actividad 2</title>
+	<script>
+		window.onload = function() {
+			foto1.onclick = muestra;
+			foto2.onclick = muestra1;
+		}
+
+		function muestra() {
+			limpiar();
+			var para = document.createElement("p");
+
+			var descripcion = foto1.title;
+			var node = document.createTextNode(descripcion);
+			para.appendChild(node);
+
+			des1.appendChild(para);
+		}
+
+		function muestra1() {
+			limpiar();
+			var para1 = document.createElement("p");
+
+			var descripcion1 = foto2.title;
+			var node1 = document.createTextNode(descripcion1);
+			para1.appendChild(node1);
+
+			des1.appendChild(para1);
+		}
+
+		function limpiar(){
+			des1.removeChild(des1.childNodes[0]);
+		}
+	</script>
+</head>
+
+<body>
+	<img src="http://memeschistosos.net/wp-content/uploads/2017/01/2017-graciosas-imagenes25.jpg" id="foto1" title="Yo cuando estudio" width="300" height="300">
+
+	<img src="http://fraseshoy.org/wp-content/uploads/2016/10/chis-6.jpg" id="foto2" title="Tortuga y Liebre" width="300" height="300">
+
+	<div id="des1">
+	</div>
+
+
+</body>
+
+</html>

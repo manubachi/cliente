@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 6</title>
+        <style media="screen">
+        .caja {
+            font-size: 18px;
+            border: 1px;
+            margin: 0 0 25px;
+            overflow: hidden;
+            padding: 20px;
+            font-weight: 400;
+        }
+
+        </style>
+        <script src="limpiarCodigo.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="div1">
+
+            <p id="op1" class="caja" ></p>
+        </div>
+
+        <div id="div2">
+            <p id="op2" class="caja"></p>
+        </div>
+
+        <input type="button" id="genera" value="Genera"><br><br>
+
+        <div id="resultado">
+            <p id="res" class="caja"></p>
+        </div>
+        <input type="button" id="comp" value="Compara">
+    </body>
+
+    <script type="text/javascript">
+    var n1, n2;
+        window.onload = function() {
+            genera.addEventListener('click', generar);
+            comp.addEventListener('click', comparar)
+            buscar();
+        }
+
+        function generar() {
+            n1 = Math.ceil(Math.random()*10);
+            n2 = Math.ceil(Math.random()*10);
+            op1.textContent = n1;
+            op2.textContent = n2;
+
+        }
+
+        function comparar(){
+            let comp1 = parseInt(op1.textContent);
+            let comp2 = parseInt(op2.textContent);
+            let mayor;
+            if (comp1 > comp2) {
+                mayor = div1.childNodes[0].childNodes[0].cloneNode(true);
+                if (resultado.childNodes[0].childNodes[0] == undefined) {
+                    resultado.childNodes[0].appendChild(mayor);
+                }else {
+                    resultado.childNodes[0].replaceChild(mayor,resultado.childNodes[0].childNodes[0]);
+                }
+
+                div1.childNodes[0].removeChild(div1.childNodes[0].childNodes[0]);
+            } else {
+                mayor = div2.childNodes[0].childNodes[0].cloneNode(true);
+                if (resultado.childNodes[0].childNodes[0] == undefined) {
+                    resultado.childNodes[0].appendChild(mayor);
+                }else {
+                    resultado.childNodes[0].replaceChild(mayor,resultado.childNodes[0].childNodes[0]);
+                }
+                div2.childNodes[0].removeChild(div2.childNodes[0].childNodes[0]);
+            }
+        }
+
+
+    </script>
+</html>

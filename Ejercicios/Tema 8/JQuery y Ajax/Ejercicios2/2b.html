@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <select id="curso">
+        <option value="1daw">1º DAW</option>
+        <option value="2daw">2º DAW</option>
+        <option selected="selected">Seleccione un curso</option>
+    </select>
+	<button class="ver-cursos">Ver Cursos</button>
+	<div class="cursos">
+	    <ul>
+            <li>Lista de alumnos matriculados en <span id="cur"></span> :
+                <ul class="alumnos">
+
+                </ul>
+            </li>
+	    </ul>
+	</div>
+
+</body>
+<script type="text/javascript">
+    var valor = '';
+    $(document).ready(function() {
+        $('button').on('click', function() {
+            $('#cur').empty();
+            valor = $('#curso').val();
+            $('#cur').text(valor);
+            $('.alumnos').empty();
+             $.post("servidor2.php",{ciclo: valor},function(data){
+                 $.each(data, function( key, value ) {
+                        $('.alumnos').append(`<li>Nombre: ${value.nombre}.
+                            DNI: ${value.dni}
+                            Acceso: ${value.acceso} </li>`)
+                });
+
+            });
+        })
+    });
+</script>
+</html>

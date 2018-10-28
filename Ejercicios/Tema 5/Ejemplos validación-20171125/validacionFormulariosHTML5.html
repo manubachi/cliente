@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		
+		<script>
+
+			function myFunction() {
+			    var txt = "";
+			    if (document.getElementById("id1").validity.patternMismatch) {
+			        
+			        id1.setCustomValidity('Solo puede introducir caracteres alfabéticos de a - z');
+			        //id1.validationMessage = "Solo puede introducir caracteres alfabéticos de a - z"; //no se puede hacer, SOLO LECTURA
+			        
+			        error.innerHTML = id1.validationMessage;
+			   
+			    } 
+			}    
+		
+		    window.onload = function(){
+			    
+			  	
+		    	validar.onclick = myFunction;
+			    
+			}
+
+		</script>
+
+	</head>
+
+	<body>
+
+		<p>Introduzca un mensaje y haga click en ok</p>
+
+		<input id="id1" type="text" pattern='[a-z]+'>
+		<input type="submit" value='OK' id='validar'>
+
+		<p id="error"></p>
+
+		
+	</body>
+</html>
+

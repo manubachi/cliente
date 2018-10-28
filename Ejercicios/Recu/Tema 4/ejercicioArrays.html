@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript">
+    /*
+    var comentarios = [..., ..., ...];
+
+    1 . Primera letra mayúscula.
+
+    2. Devolver un array con las longitudes de cada comentario.
+
+    3. Comprobar si el usuario escribe en algunos comentarios sobre "software"
+
+    4.Mostrar el comentario en el que aparece.
+
+    5. Comprueba si todos los comentarios son inferiores a 30 caracteres.
+
+    6.Media de caracteres de los comentarios
+
+     */
+
+    var comentarios = ["este es el primer comentario",
+        "se conoce como software​ al soporte lógico de un sistema informático",
+        "este comentario es corto",
+        "software"
+    ];
+    // 1
+
+    comentarios.forEach((elem,index) =>
+        comentarios[index] = elem.charAt(0).toUpperCase() + elem.slice(1))
+
+    for (const com of comentarios) {
+        console.log(com);
+    }
+
+    //2
+    var longitudes = comentarios.map(elem => elem.length )
+    for (const l of longitudes) {
+        console.log(l);
+    }
+
+    //3
+    //console.log(comentarios.some(elem => elem.indexOf("software") > -1));
+    console.log("3."+comentarios.some(elem => /software/i.test(elem)));
+    //4
+    let s = comentarios.filter(item => /software/i.test(item))
+    console.log(s);
+
+    //5
+    console.log(comentarios.every(elem => elem.length < 30));
+
+    //6
+    let total = longitudes.reduce((total,num) => (total + num), 0)/longitudes.length;
+
+    console.log(total);
+
+    </script>
+</html>

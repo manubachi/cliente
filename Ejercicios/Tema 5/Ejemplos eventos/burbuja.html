@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+        
+	    function alerta(){
+	        alert(this);
+	        
+	    }
+	    
+	    window.onload = function (){
+	         document.getElementsByTagName('body')[0].addEventListener('click',alerta,false);
+	        caja.addEventListener('click',alerta,false);
+	        enviar.addEventListener('click',alerta,false);
+	    }
+
+    </script>
+</head>
+<body>
+	
+	<div id="caja" class="boton">
+            <input type='button' id="enviar" value='Hazme click'></inpunt>
+    </div>
+	
+</body>
+</html>

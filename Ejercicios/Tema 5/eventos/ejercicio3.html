@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<!-- Realizar las acciones necesarias para deshabilitar el botón derecho del ratón al hacer click sobre
+la ventana del navegador.
+ -->
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 3</title>
+		<script type="text/javascript">
+			function desactivar() {
+				alert("Se ha inhabilitado el botón");
+				return false;
+
+			}
+
+			window.onload = function() {
+				document.oncontextmenu = desactivar;
+			}
+		</script>
+	</head>
+	<body >
+	</body>
+</html>

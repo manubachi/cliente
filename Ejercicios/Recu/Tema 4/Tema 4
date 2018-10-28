@@ -1,0 +1,94 @@
+ARRAYS
+
+var v = new Array (5);    v = [undefined,undefined,undefined,undefined,undefined];
+
+var v2 = [5];             v2 = [5];
+
+var v3 = v; -> esto es un puntero que apunta a v. Si se cambia algo en v3 también se cambia en v.
+
+*PAra crear una copia independiente. SE utiliza un for o el método slice: var v3 = v.slice();
+
+*Para mostrar elementos de un array por pantalla: v.join("-");
+
+*Para unir dos arrays: var v4 = v.concat(v2); -> Devuelve un array que contiene los elementos de los otros dos.
+
+*Añadir elementos al final del array : v.push(5) -> añade "5" al final y devuelve la nueva longitud.
+
+*Eliminar ultimo elemento de un array y lo devuelve -> v.pop();
+
+* Añadir elementos al principio de un array : v.unshit(5) -> añade "5" al principio y devuelve la nueva longitud
+
+* Eliminar elementos al principio de un array : v.shift()
+
+* Ordenar alfabeticamente elementos de un array -> v.sort();
+
+* Ordenar por numeros ascendentemente : v.sort(function(a,b){return a-b});
+
+* Ordenar por numeros descendentemente : v.sort(function(a,b){return b-a});
+
+* slice() -> devuelve un nuevo array con un subconjunto de elementos del array original.
+ v.slice(1,3) -> DEvuelve un array con los elementos desde la posición 1 al 3 sin incluir al ultimo.
+
+* splice() -> modifica el array original añadiendo o eliminando elementos.
+
+var v = [0,1,2,3,4,5]
+
+v.splice(3,2) // Se eliminan 2  elementos a partir de la posicion 3 v.splice(desdeDonde,cuantosElementosBorra)
+v = [0,1,2,5]
+
+v.splice(3,0,3,4) // Se añaden a partir de la posicion 3los elementos indicados 3 y 4 v.splice(desdeDonde,cuantosElementosBorra,elementosNuevos)
+
+
+
+*indexOf() -> busca un elemento y devuelve la posición de la primera ocurrencia, si devuelve -1; no se ha encontrado el elemento.
+
+*lastIndexOf() -> busca un elemento y devuelve la posición de la última ocurrencia, si devuelve -1; no se ha encontrado el elemento.
+
+* Array.isArray(v) -> true o false si es un array o no.
+
+* arrayFrom() --> para convertir un pseudoArray en un Array puro
+
+* every() -> devuelve true si TODOS los elementos del array cumplen la condicion :v.every(elem => elem >= 10); // DEvuelve true si todos los elementos son mayores que 10.
+
+* some() -> devuelve true si ALGÚNO de los elementos del array cumplen la condicion :v.some(elem => elem >= 10); // DEvuelve true si alguno de  los elementos son mayores que 10.
+
+* filter() -> devuelve un nuevo array con los elementos que cumplen la funcion pasada entre paréntesis.
+
+var v2 = v.filter(elem => elem >= 10);
+
+* forEach() -> ejecuta la funcion de la condición a cada elemento. Los devuelve de manera independiente.
+
+* map() -> Devuelve un nuevo array con los resultados de aplicar una funcion a cada elemento del array original.
+
+* reduce() -> reduce a un unico valor, aplicando la funcion pasada por parámetro.
+
+DESTRUCTURING
+v[10,20,5]
+
+a = v[0] = 10; 			let[a,b,c] = v;
+
+b = v[1] = 20;
+
+c = v[2] = 5;
+
+OBJETOS PREDEFINIDOS: 
+
+la herencia se realiza con la función call()
+por ejemplo trabajador hereda de persona.
+
+Function Trabajador (oficio,empresa,nombre)
+{
+	Persona.call(this,nombre);
+	this.oficio = oficio;
+	this.empresa = empresa;
+
+}
+
+Trabajador.prototype = new Persona();
+
+
+
+
+
+
+

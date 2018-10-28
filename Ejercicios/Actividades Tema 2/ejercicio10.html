@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 10</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var frase=prompt("Introduce una frase: ", "");
+		    var caracteres= "";
+
+		    for(i=0;i<frase.length; i++){
+
+		       if(!isNaN(frase.charAt(i))){
+		         continue;
+		       }else
+		          caracteres+= frase.charAt(i) + "\n";
+		    }
+		    alert(caracteres);
+
+		</script>
+	</body>
+</html>

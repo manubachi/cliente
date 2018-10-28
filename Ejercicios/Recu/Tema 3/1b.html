@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 1</title>
+    </head>
+    <body>
+        <input type="text" id="valor" >
+        <input type="button" id="abrir" value="Abrir">
+        <br>
+        <br>
+        <input type="button" id="izq" value="Mover Izquierda">
+        <input type="button" id="der" value="Mover Derecha">
+
+    </body>
+
+    <script type="text/javascript">
+        document.getElementById('abrir').addEventListener("click", abrir);
+        document.getElementById('izq').addEventListener("click", moverIzq);
+        document.getElementById('der').addEventListener("click", moverDer);
+        var ventana;
+        function abrir(){
+            ventana = window.open('', 'Nueva Ventana', 'width=600px, height=300px');
+            ventana.focus();
+        }
+
+        function moverIzq(){
+            if (ventana) {
+                let valor = document.getElementById('valor').value;
+                ventana.window.moveBy(-valor,0)
+            }else {
+                alert('No se ha abierto ninguna ventana');
+            }
+        }
+
+        function moverDer(){
+            if (ventana) {
+                let valor = document.getElementById('valor').value;
+                ventana.window.moveBy(valor,0)
+            }else {
+                alert('No se ha abierto ninguna ventana');
+            }
+        }
+    </script>
+</html>

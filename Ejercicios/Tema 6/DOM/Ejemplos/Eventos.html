@@ -1,0 +1,47 @@
+<html>
+<head>
+    <script type="text/javascript">
+        var container = null, textNode = null;
+        function AddTextToContainer () {
+		
+            if (!textNode.parentNode) {
+                container.appendChild (textNode);
+				
+            }
+        }
+        function RemoveTextFromContainer () {
+            if (textNode.parentNode) {
+                container.removeChild (textNode);
+            }
+        }
+
+        function OnSubtreeModified () {
+            alert ("The subtree that belongs to the container has been modified.");
+			container.removeEventListener('DOMSubtreeModified',OnSubtreeModified);
+        }
+		function OnNodeInserted () {
+            alert ("Insertado");
+        }
+		function OnNodeRemoved () {
+            alert ("Borrado");
+        }
+	
+        function Init () {
+            container = document.getElementById ("container");
+            if (container.addEventListener) {
+                container.addEventListener ('DOMSubtreeModified', OnSubtreeModified, false);
+				container.addEventListener ('DOMNodeInserted', OnNodeInserted, false);
+				container.addEventListener ('DOMNodeRemoved', OnNodeRemoved, false);
+            }
+
+            textNode = document.createTextNode ("My text");
+        }
+    </script>
+</head>
+<body onload="Init ()">
+    <div id="container" style="background-color:#e0d0a0; width:300px; height:100px;"></div>
+    <br /><br />
+    <button onclick="AddTextToContainer ()">Insert the text into the container</button>
+    <button onclick="RemoveTextFromContainer ()">Remove the text form the container</button>
+</body>
+</html>

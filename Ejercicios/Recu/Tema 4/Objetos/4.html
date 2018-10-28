@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 4</title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript">
+		function Cliente(nombre_in,direccion_in,telefono_in,nif_in)
+		{
+			this.nombre = nombre_in;
+			this.direccion = direccion_in;
+			this.telefono = telefono_in;
+			this.nif = nif_in;
+		}
+        
+        function Elemento(descripcion, cantidad, precio){
+            this.descripcion = descripcion;
+			this.cantidad = cantidad;
+			this.precio = precio;
+        }
+
+		function Factura(cliente,elementos = [], infoPago)
+		{
+			this.cliente = cliente;
+			this.elementos = elementos;
+            this.infoPago = {
+                 base_imponible = 0;
+			     iva = 21.0;
+			     total = 0;
+			     forma_pago = "contado";
+            }
+		}
+
+		function Empresa(nombre,direccion,telefono,cif)
+		{
+			this.nombre= nombre;
+			this.direccion = direccion;
+			this.telefono = telefono;
+			this.cif = cif;
+		}
+		Factura.prototype.empresa = function(empresa) {
+			this.empresa = empresa;
+		};
+
+		Factura.prototype.calculaTotal = function()
+		{
+			for (var i in this.elementos) {
+				let cantidad = this.elementos[i][1];
+				let precio = this.elementos[i][2];
+				this.base_imponible += cantidad * precio;
+			}
+
+			this.total = this.base_imponible + (this.base_imponible * (this.iva/100));
+		};
+
+		Factura.prototype.muestraTotal = function() {
+			document.write("Total de la factura(IVA incluido) = " + this.total);
+		};
+
+		var elementos = [
+			new Elemento("Flores", 2, 25.5),
+		    new Elemento("Flores", 2, 20),
+			new Elemento("Flores", 1, 32)
+		];
+        
+		var empresa = new Empresa("Flores S.L.","Chipiona","956372578","U98811243");
+		var cliente = new Cliente("Manuel","Chipiona","623789645","20678845M")
+		var factura = new Factura(cliente,elementos);
+
+		factura.empresa(empresa);
+		factura.calculaTotal();
+		factura.muestraTotal();
+
+	</script>
+</html>

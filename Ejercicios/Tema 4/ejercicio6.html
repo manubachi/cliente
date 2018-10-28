@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Actividad 6 Arrays</title>
+	<script type="text/javascript">
+		var impares = [1,3,5,7,9,11,13,15,17,19,21];
+		var opcion = 0;
+		function menu()
+		{
+  			opcion=parseInt(prompt("---MENU---\n"+
+             	 	"1. Calcular suma de los elementos del Array\n"+
+             	 	"2. Mostrar Array inverso\n"+
+              	"3. Búsqueda de un elemeto en el Array y borrarlo\n"+
+              	"4. Mostrar ordenado ascendentemente\n" +
+              	"5. Mostrar ordenado descendentemente\n" +
+  						 	"Seleccione una opción :"));
+  			switch (opcion) {
+  				case 1:
+  					suma();
+  					break;
+  				case 2:
+  					invertir();
+  					break;
+  				case 3:
+  					buscar();
+  					break;
+  				case 4:
+  					ascendente();
+  					break;
+  				case 5:
+  					descendente();
+  					break;
+  				default:
+  					alert("Opción incorrecta");
+  					menu();
+  					break;
+  			}
+		}
+
+		function suma()
+		{
+			// Sumo los números uno a uno del array
+			var resultado = 0;
+			for (var i = 0; i < impares.length; i++) {
+				resultado += impares[i];
+			}
+			alert("Array: " + impares.join(",") + "\n Suma de sus elementos: "+ resultado) ;
+		}
+
+		function invertir()
+		{
+			// Invierto el orden de los números del array con reverse().
+
+			alert("Array Original: " + impares.join(",") + "\nArray invertido: "+ impares.reverse().join(",")) ;
+		}
+
+		function buscar()
+		{
+			numero= parseInt(prompt("Introduce un número a buscar"));
+			//Busco la posicion del úmero introducido, si es -1 es que no se ha encontrado
+			posicion= impares.indexOf(numero);
+			if (posicion < 0) {
+				alert("El número "+ numero+ " no se encuentra")
+			}else {
+				// Si lo encuentra lo quito del array con splice
+				impares.splice(posicion,1)
+				alert("Array sin el número introducido "+ impares.join(",")) ;
+			}
+
+		}
+
+		function ascendente()
+		{
+			// Ordena el array ascendentemente
+			impares.sort(function(a,b){return a-b})
+			alert("Array Ordenado ascendentemente : "+ impares.join(","));
+		}
+
+		function descendente()
+		{
+			// Ordena el array descedentemente
+			impares.sort(function(a,b){return b-a})
+			alert("Array Ordenado descendentemente : "+ impares.join(","));
+		}
+		menu();
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

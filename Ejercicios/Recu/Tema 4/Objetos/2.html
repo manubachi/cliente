@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<!--  Cree un script que defina un objeto llamado Producto_alimenticio. Este objeto debe
+presentar las propiedades código, nombre y precio, además del método imprimeDatos, el
+cual escribe por pantalla los valores de sus propiedades. Posteriormente, cree tres instancias
+de este objeto y guárdelas en un array. Posteriormente, utilice el método imprimeDatos
+para mostrar por pantalla los valores de los tres objetos instanciados. -->
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 2</title>
+    <script type="text/javascript">
+       var alimentos = new Array(3);
+       var expresion_regular_nombre = /^[A-Za-z]+$/;
+
+      function Producto_alimenticio(codigo_in,nombre_in,precio_in)
+      {
+          this.codigo = codigo_in;
+          this.nombre = nombre_in;
+          this.precio = precio_in;
+          this.imprimeDatos = function () {
+            var resultado = "";
+            for (var i in this) {
+              if (typeof this[i] != "function") {
+                resultado +=  i + " = " + this[i] + "<br>"
+              }
+            }
+            return resultado + "<hr>";
+          };
+      }
+
+      function crear()
+      {
+        for (var i = 0; i < alimentos.length; i++) {
+          let nombre = prompt("Introduce el nombre del producto: ");
+
+          if(expresion_regular_nombre.test(nombre) == false ){
+            alert("ERROR NOMBRE NO  VÁLIDO: EL nombre debe ser una cadena");
+            crear();
+            alimentos.splice();
+          }
+
+          let codigo = prompt("Introduce el código del producto: ");
+
+          if(codigo < 0 || isNaN(codigo) || codigo > 999 || codigo - Math.floor(codigo) != 0 ){
+            alert(`ERROR CÓDIGO NO VÁLIDO: El código debe ser un número entero positivo y de 3 cifras como máximo `);
+            crear();
+            alimentos.splice();
+          }
+
+          let precio = prompt("Introduce el precio del producto:");
+
+          if(precio < 0 || isNaN(precio) ){
+            alert(`ERROR PRECIO NO VÁLIDO: El precio debe ser un número positivo `);
+            crear();
+            alimentos.splice();
+          }
+          alimentos[i] = new Producto_alimenticio(codigo,nombre,precio);
+
+        }
+        for (var i = 0; i < alimentos.length; i++) {
+          for (var x = i+1; x < alimentos.length; x++) {
+            if (alimentos[i].codigo == alimentos[x].codigo) {
+              alert(`ERROR CÓDIGO REPETIDO: El código de los alimentos no pueden estar repetidos `);
+              crear();
+              alimentos.splice();
+            }
+          }
+        }
+      }
+
+      function mostrar()
+      {
+        for (var i = 0; i < alimentos.length; i++) {
+          document.write(alimentos[i].imprimeDatos());
+        }
+      }
+
+      crear();
+      mostrar();
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <select id="curso">
+        <option value="1daw">1º DAW</option>
+        <option value="2daw">2º DAW</option>
+        <option selected="selected">Seleccione un curso</option>
+    </select>
+	<button class="ver-cursos">Ver Cursos</button>
+    <br>
+    <br>
+	<div class="cursos">
+	   Lista de alumnos matriculados en <span id="cur"></span> :
+       <br/>
+       <br>
+       <table id="alumnos" style="display:none">
+           <thead>
+               <th>Nombre</th>
+               <th>Dni</th>
+               <th>Acceso</th>
+           </thead>
+           <tbody id="datos">
+           </tbody>
+       </table>
+	</div>
+
+</body>
+<script type="text/javascript">
+    var valor = '';
+    $(document).ready(function() {
+        $('button').on('click', function() {
+            $('#cur').empty();
+            valor = $('#curso').val();
+            $('#cur').text(valor);
+            $('#datos').empty();
+             $.post("servidor2.php",{ciclo: valor},function(data){
+                 $.each(data, function( key, value ) {
+                        $('#datos').append(`<tr>
+                            <td>
+                                ${value.nombre}
+                            </td>
+                            <td>
+                                ${value.dni}
+                            </td>
+                            <td>
+                                ${value.acceso}
+                            </td>
+                            </tr>`)
+                });
+
+            });
+            $('#alumnos').css({'display' : 'block'})
+        })
+    });
+</script>
+</html>

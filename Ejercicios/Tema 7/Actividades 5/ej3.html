@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 3</title>
+	<style type="text/css">
+		.div1 {
+			height: 800px; 
+			width: 70px;
+			background-color: red;
+		}
+
+		.div2 {
+			height: 250px; 
+			width: 250px;
+			background-color: red;
+		}
+	</style>
+	<script
+  		src="https://code.jquery.com/jquery-3.2.1.js"
+  		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  		crossorigin="anonymous">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var ancho,alto;
+			$('#div').dblclick(function () {
+				if ($(this).hasClass('div1')) {
+					$(this).removeClass('div1')
+					$(this).addClass('div2')
+					ancho = $(this).width();
+					alto = $(this).height();
+				} else{
+					$(this).removeClass('div2')
+					$(this).addClass('div1')
+					ancho = $(this).width();
+					alto = $(this).height();
+				}
+			})
+			var boton = $('<input>');
+			boton.attr('type','button');
+			boton.attr('id','btn');
+			boton.attr('value','Aumentar')
+			$('#botones').append(boton);
+
+			var boton1 = $('<input>');
+			boton1.attr('type','button');
+			boton1.attr('id','btn1');
+			boton1.attr('value','Reducir')
+			$('#botones').append(boton1);
+
+			$('#btn').on('click', function() {
+				ancho = $('#div').width();
+				alto = $('#div').height();
+				$('#div').animate({'height': alto+100,
+				                 	'width': ancho+100});
+			})
+
+			$('#btn1').on('click', function() {
+				ancho = $('#div').width();
+				alto = $('#div').height();
+				$('#div').animate({'height': alto-50,
+				                 	'width': ancho-50});
+			})
+		})
+	
+	</script>
+</head>
+<body>
+	<div class="div1" id='div'> Esto es un div</div>
+	<div id="res"></div>
+	<div id='botones'></div>
+</body>
+</html>

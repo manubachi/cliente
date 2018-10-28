@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ejemplos promesas</title>
+    </head>
+
+    <body>
+        <script src="jquery-3.2.1.min.js"></script>    
+        <script type="text/javascript">
+            // Primer problema de peticiones AJAX sin promesas
+            function saludarEjercicio1() {
+                var respuesta = null;
+
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=1',
+                    success: function(data){
+                        console.log("\n DENTRO DEL SUCCESS:");
+                        console.log(data.saludo);
+
+                        respuesta = data.saludo;
+                        // return respuesta; // NO ES POSIBLE HACER ESTO
+
+                        // Si se quieren hacer mas peticiones se provocaria una "callback hell",
+                        // una piramide de llamadas que resulta engorroso de leer y provocaria un
+                        // caos en el control de las llamadas
+                        $.ajax({
+                            url: 'consola.php',
+                            type: 'GET',
+                            data: 'ejercicio=1',
+                            success: function (data) {
+                                $.ajax({
+                                    url: 'consola.php',
+                                    type: 'GET',
+                                    data: 'ejercicio=1',
+                                    success: function (data) {
+                                        console.log("\n FINAL PIRAMIDE:");
+                                        console.log(data.finalPiramide);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        console.error(textStatus);
+                                    }
+                                });
+
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.error(textStatus);
+                            }
+                        });
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.error(textStatus);
+                    }
+                });
+
+                // NO SE PUEDE LLEVAR UN CONTROL DEL PROGRAMA DE FORMA VERTICAL CON LAS RESPUESTAS
+
+                return respuesta; // NO SE CONTROLA LA RESPUESTA EN UNA FUNCION
+            }
+
+            /*
+            console.log("-- INICIO FUNCION:");
+            console.log(saludarEjercicio1());
+            console.log("-- FINAL FUNCION");
+            */
+
+            ////////////////////////////////////////////
+
+            // Posible "solucion" a los problemas de control no vertical
+            function saludarEjercicio2() {                                
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=2&nombre=pepe',
+                }).done(function(data){
+                    console.log(data.saludo + ' - PRIMERA LLAMADA');
+                    return {saludo: 'Cambio de saludo'}; // NO SE PUEDEN ENCADENAR RESPUESTAS
+                }).done(function(data){
+                    console.log(data.saludo + ' - SEGUNDA LLAMADA');
+                }).done(function (data) {
+                    console.log(data.saludo + ' - TERCERA LLAMADA');
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                    console.error(textStatus);
+                }).always(function(data){
+                    console.log('-- ULTIMA LLAMADA SIEMPRE REALIZADA');
+                });
+                
+                // Llamada con error
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=2&', // FALLO
+                }).done(function(data){
+                    console.log(data.saludo + ' - PRIMERA LLAMADA');
+                }).done(function(data){
+                    console.log(data.saludo + ' - SEGUNDA LLAMADA');
+                }).done(function (data) {
+                    console.log(data.saludo + ' - TERCERA LLAMADA');
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                    // Llega a aqui
+                    console.error(textStatus);
+                });
+                
+                // Llamada con procesos asincronos dentro
+                console.log("-- INICIO 1ª LLAMADA:");
+
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=2&nombre=manuel',
+                }).done(function(data){
+                    console.log(data.saludo + ' - PRIMERA LLAMADA');
+
+                    // NO SE SOLUCIONA EL PROBLEMA DE QUERER TENER MAS PETICIONES ASINCRONAS DENTRO
+                    $.ajax({
+                        url: 'consola.php',
+                        type: 'GET',
+                        data: 'ejercicio=2&nombre=toro'
+                    }).done(function(dataSegundoProceso){
+                         console.log(dataSegundoProceso.saludo + ' - SEGUNDA LLAMADA');
+                    });
+                   
+                    console.log("-- FINAL 2ª LLAMADA:");
+
+                }).done(function(data){
+                    console.log('-- ULTIMO DONE');
+                });
+
+                console.log("-- FINAL 1ª LLAMADA:");
+            }
+
+            //saludarEjercicio2();
+
+            ////////////////////////////////////
+
+            // Ejemplo sencillo de como crear una promesa en JAVASCRIPT PURO y XMLHttpRequest
+            /*
+            var miPromesa = new Promise(function(resolve, reject){
+                let req = new XMLHttpRequest();
+                req.open("GET", 'consola.php?ejercicio=3');
+
+                req.onload = function () {
+                    if (req.status === 200) {
+                        // OCURRE CUANDO TODO HA IDO BIEN
+                        // LE PASAMOS COMO ARGUMENTO LOS DATOS QUE NECESITEMOS
+                        resolve(req.response);
+                    } else {
+                        reject(req.statusText); // CUANDO HA IDO MAL
+                    }
+                };
+
+                req.onerror = function () {
+                    reject("Fallo de conexion"); // CUANDO HA IDO MAL
+                };
+
+                req.send();                
+            });
+
+            // SE PUEDEN ENCADENAR LOS RESULTADOS
+            miPromesa.then(function(data){
+                console.log("-- PRIMER THEN, NO ESTA PARSEADO:");
+                console.log(data);
+
+                return JSON.parse(data); // PUEDE DEVOLVER CUALQUIER TIPO DE DATO, INCLUIDO OTRA PROMESA
+
+            }).then(function(instante){
+                console.log('\n -- ULTIMO THEN YA PARSEADO');
+                console.log(instante);
+            }).catch(function(data){    // SE PUEDE CAPTURAR EL ERROR CON CATCH
+                console.error(data);
+            });                        
+            */
+
+            // Ejemplo de como crear una promesa con JAVASCRIPT PURO y AJAX  
+                     
+            function devolverPromesa(nombre){
+                return new Promise(function(resolve, reject){
+                    $.ajax({
+                        url: 'consola.php',
+                        type: 'GET',
+                        data: 'ejercicio=2&nombre='+nombre,
+                        success: function(data){
+                            resolve(data); // TODO HA IDO BIEN
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            reject(textStatus); // ALGO HA IDO MAL
+                        }
+                    });
+                }, nombre); // SE LE PUEDEN PASAR PARAMETROS A LAS PROMESAS
+            }            
+            
+
+            /*
+            devolverPromesa('manuel').then(function(data){
+                console.log(data.saludo);
+            });
+            
+            
+            
+            // Ejemplo de hacer mas de 1 promesa a la vez            
+            var p1 = devolverPromesa('toro');
+            var p2 = devolverPromesa('manuel');
+            var p3 = devolverPromesa('oscar');
+
+            Promise.all([p1, p2, p3]).then(function(aSaludos){
+                console.log(aSaludos[0]);
+                console.log(aSaludos[1]);
+                console.log(aSaludos[2]);
+            });            
+            */
+
+            // SI FALLA ALGUNA PROMESA NO SE REALIZA EL THEN
+            /*
+            var p1 = devolverPromesa('toro');
+            var p2 = Promise.reject('fallo en promesa 2');
+            var p3 = devolverPromesa('oscar');
+
+            Promise.all([p1, p2, p3]).then(function(aSaludos){
+                console.log(aSaludos[0]);
+                console.log(aSaludos[1]);
+                console.log(aSaludos[2]);
+
+            }, function(error){
+                console.error(error);
+            });
+            */
+/*
+            
+            // Lo mismo que all, pero en este caso solo devuelve el dato de la primera promesa
+            var p1 = devolverPromesa('toro');
+            var p2 = devolverPromesa('manuel');
+            var p3 = devolverPromesa('oscar');
+
+            Promise.race([p1, p2, p3]).then(function(saludo){
+                console.log(saludo);
+            });                        
+            
+*/
+            
+            // Ejemplo de como crear una promesa con jQuery y AJAX -- FORMA FINAL MAS CORRECTA
+           /*
+            function devolverPromesa(nombre){
+                var promise = $.Deferred();
+
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=2&nombre=' + nombre,
+                    success: function (data) {
+                        // El metodo resolve se coge desde la promesa
+                        promise.resolve(data); // TODO HA IDO BIEN
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // El metodo reject se coge desde la promesa
+                        promise.reject(textStatus); // ALGO HA IDO MAL
+                    }
+                });                
+
+                return promise;
+            }*/
+            
+
+            /*
+            devolverPromesa('toro').then(function(data){
+                console.log(data);
+            }, function(error){
+                // SE LE PUEDE PASAR COMO SEGUNDO PARAMETRO LA FUNCION DEL ERROR (CATCH)
+                // PERO A DIFERENCIA DEL CATCH, NO CAPTURA EXCEPCIONES
+                console.error(error);
+            });
+            */
+            
+            // Ejemplo when, es lo mismo que all pero con jQuery  
+            /*          
+            var p1 = devolverPromesa('manuel');
+            var p2 = devolverPromesa('toro');
+            var p3 = devolverPromesa('pinguino');
+
+            var promesas = [p1, p2, p3];
+
+            // EN ESTE CASO EL PARAMETRO DEL WHEN NO ES UN ARRAY
+            // Y EL THEN NO RECIBE UN ARRAY CON LOS PARAMETROS,
+            // SINO TANTOS COMO PROMESAS HAYA
+            $.when(...promesas).then(function(...aSaludos){
+                console.log(aSaludos[0]);
+                console.log(aSaludos[1]);
+                console.log(aSaludos[2]);
+            });            
+*/
+
+            ///////////////////////////////////////////
+
+            // Ejemplo de encadenar promesas
+            /*
+            function devolverPromesaEj3(numero, espera){
+                var promise = $.Deferred();
+
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=4&numero='+numero+'&espera='+espera,
+                    success: function (data) {
+                        // El metodo resolve se coge desde la promesa
+                        promise.resolve(data); // TODO HA IDO BIEN
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // El metodo reject se coge desde la promesa
+                        promise.reject(textStatus); // ALGO HA IDO MAL
+                    }
+                });
+
+                return promise;                
+            }
+
+            var p1 = devolverPromesaEj3(4, 1);
+
+            p1.then(function(data){
+                console.log('-- PRIMER THEN');
+                return devolverPromesaEj3(1, data.numero);
+            }).then(function(data){
+                // PUEDE RECOGER PROMESAS Y HACER ALGO EN CONSECUENCIA
+                console.log('-- ULTIMO THEN');
+                console.log(data);
+            });
+            */
+            ///////////////////////////////////////////////
+
+            // Diferencia entre done y then
+            /*
+            function devolverPromesaEspera(numero, espera){
+                var promise = $.Deferred();
+
+                $.ajax({
+                    url: 'consola.php',
+                    type: 'GET',
+                    data: 'ejercicio=4&numero='+numero+'&espera='+espera,
+                    success: function (data) {
+                        console.log(data.numero);
+                        promise.resolve(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        promise.reject(textStatus);
+                    }
+                });
+
+                return promise;
+            }
+            */
+            
+
+            
+            // SE EJECUTAN UNA DETRAS DE OTRA DE FORMA CORRECTA
+            /*
+            devolverPromesaEspera(1, 1)            
+            .then(() => devolverPromesaEspera(2, 1))
+            .then(() => devolverPromesaEspera(3, 1))
+            .then(() => devolverPromesaEspera(4, 1));
+            */
+
+            // EN ESTE CASO SOLO ESPERA A QUE TERMINE LA PRIMERA PROMESA DE LA CADENA
+            /*
+            devolverPromesaEspera(1, 1)            
+            .done(() => devolverPromesaEspera(2, 1))
+            .done(() => devolverPromesaEspera(3, 4))
+            .done(() => devolverPromesaEspera(4, 1));
+            */
+            
+
+            //////////////////////////////////////////////
+
+        </script>
+    </body>
+
+</html>

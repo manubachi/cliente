@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang='es'>
+        <head>
+              <meta charset="utf-8" />
+              <title></title>
+              <style type="text/css">
+                  .error{color:red;}
+              </style>
+              <script src="cookies.js">
+              </script>
+              <script src="limpiar_codigo.js">
+
+              </script>
+
+              <script type="text/javascript">
+                  window.onload= function(){
+                      buscar();
+                      nombre.onchange = validaNombre;
+                      telefono.onchange = validaTelefono;
+                      mes.onchange = validaMes;
+                      registra.onclick = validar;
+                  }
+                  var divs = document.getElementsByName('error');
+
+                  function limpiar(nodo){
+                      while (nodo.firstChild) {
+                          nodo.removeChild(nodo.firstChild);
+                      }
+                  }
+                  function validaNombre(){
+                      limpiar(divs[0]);
+                      let minus = /[a-z]+/;
+                      let mayus = /[A-Z]+/;
+                      let num = /\d+/;
+                      let signos = /[\-\.\_]+/;
+
+                      if(!(minus.test(nombre.value) && mayus.test(nombre.value) && num.test(nombre.value) && signos.test(nombre.value) )){
+                          let parrafo = document.createElement("p");
+                          let text = document.createTextNode("Formato no válido."+ nombre.title);
+                          parrafo.appendChild(text);
+                          divs[0].appendChild(parrafo);
+                          nombre.value = '';
+                          return false;
+                      }
+                      return true;
+                  }
+
+                  function validaTelefono(){
+                      limpiar(divs[1]);
+                      let expresionTelefono = /^\(\d{3}\)\s\d{2}\-\d{2}\-\d{2}$/;
+                      if(!(expresionTelefono.test(telefono.value))){
+                          let parrafo = document.createElement("p");
+                          let text = document.createTextNode("Formato no válido.");
+                          parrafo.appendChild(text);
+                          divs[1].appendChild(parrafo);
+                          telefono.value = '';
+                          return;
+                      }
+
+                      return true;
+                  }
+
+                  function validaMes(){
+                      limpiar(divs[2]);
+                      if(mes.value < 1 || mes.value >24){
+                          let parrafo = document.createElement("p");
+                          let text = document.createTextNode(mes.title);
+                          parrafo.appendChild(text);
+                          divs[2].appendChild(parrafo);
+                          mes.value = '';
+                          return false;
+                      }
+                      return true;
+                  }
+
+                  function validar(){
+                      limpiar(...divs);
+                      let validado = true;
+                      if(nombre.value == ''){
+                          let parrafo = document.createElement("p")
+                          let text = document.createTextNode("El campo no puede estar vacio");
+                          parrafo.appendChild(text);
+                          divs[0].appendChild(parrafo);
+                          validado = false;
+                      }
+
+                      if(telefono.value == ''){
+                          let parrafo = document.createElement("p")
+                          let text = document.createTextNode("El campo no puede estar vacio");
+                          parrafo.appendChild(text);
+                          divs[1].appendChild(parrafo);
+                          validado = false;
+                      }
+                      if(mes.value == ''){
+                          let parrafo = document.createElement("p")
+                          let text = document.createTextNode("El campo no puede estar vacio");
+                          parrafo.appendChild(text);
+                          divs[2].appendChild(parrafo);
+                          validado = false;
+                      }
+                      if(validado){
+                          crearCookies();
+                      }
+                  }
+
+                  function crearCookies(){
+                      setCookie("nombre",nombre.value);
+                      setCookie("telefono",telefono.value);
+                      setCookie("mes",mes.value);
+                  }
+
+              </script>
+
+        </head>
+        <body>
+              <h1>Formulario de registo Formación Doñana</h1>
+              <form>
+
+                  <label>Nombre:
+                        <input name="nombres" id="nombre" type="text" title='Debe contener al menos una minúscula, mayúscula,número y alguno de estos signos (. - _)' />
+                  </label>
+                  <div name="error" id="error">
+
+                  </div>
+                  <br>
+                  <label>Teléfono:
+                        <input name="telefonos" id="telefono" type="text"  placeholder='(XXX) XX-XX-XX' />
+                  </label>
+                   <br>
+                  <div name="error" id="error">
+
+                  </div>
+                  <br>
+                  <label>Nº meses:
+                        <input type="number" id="mes" name="meses" min='1' max='24' title='Debe introducir una cantidad entre 1 y 24'/>
+                  </label>
+                   <br>
+                  <div name="error" id="error">
+
+                  </div>
+                  <br><br>
+
+                  <br><br>
+                  <input type="button" id="registra" value="Registrar" />
+
+              </form>
+
+        </body>
+</html>

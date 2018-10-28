@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad </title>
+		<meta charset="utf-8">
+		<script type="text/javascript">
+			var eventoControlado = false;
+			window.onload = function() { 
+				//document.onkeypress = mostrarInformacionCaracter;
+				document.onkeyup = mostrarInformacionTecla; 
+			}
+
+			function mostrarInformacionTecla(elEvento) {
+				var evento = elEvento || window.event;
+				if (evento.ctrlKey) {
+					console.log( "TECLA CONTROL ACTIVADA: tecla ='" + event.key + "' | código ='" + event.code + "'");
+				}else if (evento.altKey) {
+					console.log( "TECLA ALT ACTIVADA: tecla ='" + event.key + "' | código ='" + event.code + "'");
+				}else if (evento.shiftKey) {
+					console.log( "TECLA SHIFT ACTIVADA: tecla ='" + event.key + "' | código ='" + event.code + "'");
+				}
+				else{
+					console.log( "tecla ='" + event.key + "' | código ='" + event.code + "'");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<p>Realizar un script que muestre la tecla pulsada de teclado, y si se ha pulsado combinada con alt, shift o control también lo indique. </p>
+	</body>
+
+</html>

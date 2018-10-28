@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 5</title>
+    <script type="text/javascript">
+    // Vehiculo con propiedades y métodos
+      function Vehiculo(marca,modelo,color,anyo)
+      {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.color = color;
+        this.anyo = anyo;
+      }
+
+      Vehiculo.prototype.mostrarDatos = function () {
+        let resultado = "";
+        for (let i in this) {
+          if (typeof this[i] != "function") {
+            resultado +=  i + " = " + this[i] + "<br>"
+          }
+        }
+        document.write("<hr>" + resultado) ;
+      };
+
+      Vehiculo.prototype.acelerar = function (velocidad) {
+        document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo +
+        " de color " + this.color + " ha acelarado a " + velocidad + " km/h");
+      };
+
+      Vehiculo.prototype.arrancar = function () {
+        document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo + " de color "
+        + this.color + " ha arrancado.");
+      };
+
+      Vehiculo.prototype.frenar = function () {
+        document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo + " de color "
+        + this.color + " ha parado.");
+      };
+
+      Vehiculo.prototype.cilindrada = 120;
+
+      function Furgoneta(numPasajeros,marca,modelo,color,anyo)
+      {
+        Vehiculo.call(this,marca,modelo,color,anyo);
+        this.numPasajeros = numPasajeros;
+      }
+
+      Furgoneta.prototype = new Vehiculo();
+      Furgoneta.prototype.constructor = Furgoneta;
+
+      var furgo = new Furgoneta(5,"Mercedes","Sprinter","Blanco",2013);
+
+      furgo.mostrarDatos();
+      furgo.arrancar();
+      furgo.acelerar(120);
+      furgo.frenar();
+
+      function Todoterreno(traccion,marca,modelo,color,anyo)
+      {
+        Vehiculo.call(this,marca,modelo,color,anyo);
+        this.traccion = traccion;
+      }
+
+      Todoterreno.prototype = new Vehiculo();
+      Todoterreno.prototype.constructor = Todoterreno;
+
+      var todo = new Todoterreno(true,"Kia","Sportage","Gris",2015);
+
+      todo.mostrarDatos();
+      todo.arrancar();
+      todo.acelerar(120);
+      todo.frenar();
+
+
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

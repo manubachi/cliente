@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 11b</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var numero=prompt("Introduce una numero: ", "");
+      var num= parseInt(numero);
+      var resultado = 0;
+      if(isNaN(num)){
+        alert("Introduce un numero");
+      }else{
+        for(i=0;i<numero.length;i++){
+          if((numero.charAt(i)==".") || (numero.charAt(i)==",")){
+              continue;
+          }
+          else{
+            resultado += parseInt(numero.charAt(i));
+          }
+        }
+      }
+      alert(resultado);
+
+		</script>
+	</body>
+</html>

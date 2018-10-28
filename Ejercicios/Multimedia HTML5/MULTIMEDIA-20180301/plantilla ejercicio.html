@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title></title>
+        <style media="screen">
+            .lista{
+                position: absolute;
+                top: 10px;
+                left: 400px;
+            }
+            li{
+                list-style-type: none;
+            }
+            .marcado{
+                border: 1px solid;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="audios">
+
+        </div>
+        <div>
+        <input type="file" id="intro" accept="audio/mp3"><br/>
+            <button id="next">Siguiente</button>
+            <button id="prev">Anterior</button><br/>
+            <button id="play">Empezar lista de reproducción</button><br/>
+            <button id="borrar">Limpiar lista de reproducción</button><br/>
+            <button id="guardar">Guardar lista de reproducción</button><br/>
+            <button id="cargar">Cargar lista de reproducción</button><br/>
+        </div>
+        <div class="lista">
+            <ul id="lista">
+
+            </ul>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        var nombre;
+    $(document).ready(function() {
+        $('#intro').on('change', function(){
+            let valor = document.getElementById('intro').files[0].name;
+            let li = '<li>'+ valor + '</li>';
+            $('#lista').append(li);
+        });
+
+        $('#next').on('click', function() {
+            $(".marcado").each(function(){
+                $(this).next().addClass('marcado');
+                $(this).removeClass('marcado');
+       		});
+            reproducir();
+
+        });
+
+        $('#prev').on('click', function() {
+            $(".marcado").each(function(){
+                $(this).prev().addClass('marcado');
+                $(this).removeClass('marcado');
+            });
+            reproducir();
+
+        });
+
+        $('#play').on('click',function(){
+            $('#lista').children('li').first().addClass('marcado');
+            reproducir();
+            $('#play').off('click');
+
+        });
+
+        $('#borrar').on('click',function(){
+            $('#lista').empty();
+
+        });
+
+        $('#empezar').on('click', function() {
+            $('#miaudio').play()
+        });
+
+        function reproducir() {
+            $('#audios').empty();
+            $("#lista > li").each(function(){
+                if ($(this).hasClass('marcado')) {
+                    nombre = $(this).text();
+                }
+            });
+
+           let html = '<audio id="miaudio" controls> <source src="audios/'+nombre+'" type="audio/mpeg">El nvaegador no reconoce audios HTML5</audio>'
+           $('#audios').append(html);
+        }
+    });
+
+    </script>
+</html>

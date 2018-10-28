@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 6</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="jquery.menu.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //$("nav").menu();
+                $("nav").menu({
+                    color1: "green",
+                    color2: "black",
+                    velocidad: 500
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div>
+                <div>Inicio</div>
+            </div>
+
+            <div>
+                <div>Sobre nosotros</div>
+                <div style="display: none">
+                    <div><a href="#">Información</a></div>
+                    <div><a href="#">Contacto</a></div>
+                </div>
+            </div>
+
+            <div>
+                <div>Proyectos</div>
+                <div style="display: none">
+                    <div><a href="#">Diseño Web</a></div>
+                    <div><a href="#">Aplicaciones web</a></div>
+                    <div><a href="#">Branding</a></div>
+                </div>
+            </div>
+            <div>
+                <div>FAQs</div>
+            </div>
+        </nav>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 21</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var expresion_regular_dia = /^(Lunes|Martes|Miercoles|Jueves|Viernes|Sabado|Domingo)\s([0-9]|[1-2][0-9]|3[0-1])$/i;
+
+			var dia = prompt("Introduce un dia y un número de 1-2 digitos: ");
+
+			if(expresion_regular_dia.test(dia) == false)
+				alert("La expresión introducida no está en un formato valido");
+			else
+				alert("La expresión introducida es válida");
+
+		</script>
+
+	</body>
+</html>

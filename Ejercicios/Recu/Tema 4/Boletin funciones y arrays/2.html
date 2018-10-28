@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 2</title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript">
+        var resultado;
+        obtenerImporteConImpuestos2(5);
+        function obtenerImporteConImpuestos(importe, tipo = 1) {
+            if (tipo == 1) {
+                resultado = ((21 *importe)/100) + importe;
+                alert("Importe SIN impuestos = " + importe+ "\nTipo de producto: " + tipo + "\nImporte CON impuestos = " + resultado);
+            }else if (tipo == 2) {
+                resultado = ((10 *importe)/100) + importe;
+                alert("Importe SIN impuestos = " + importe+ "\nTipo de producto: " + tipo + "\nImporte CON impuestos = " + resultado);
+            } else if (tipo == 3) {
+                resultado = ((5 *importe)/100) + importe;
+                alert("Importe SIN impuestos = " + importe+ "\nTipo de producto: " + tipo + "\nImporte CON impuestos = " + resultado);
+            } else {
+                alert('El tipo del producto debe ser 1, 2 ó 3')
+            }
+        }
+
+        function obtenerImporteConImpuestos2(importe) {
+            let impuestos = [0,0,0,0];
+            impuestos.fill('indefinido',0,1);
+            impuestos.fill(((21 *importe)/100) + importe,1,2);
+            impuestos.fill(((10 *importe)/100) + importe,2,3);
+            impuestos.fill(((5 *importe)/100) + importe,3,4);
+            console.log(impuestos.join('-'));
+        }
+    </script>
+</html>

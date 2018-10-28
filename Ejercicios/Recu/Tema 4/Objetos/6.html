@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript">
+        function Persona(nombre, edad, genero){
+            this.nombre = nombre;
+            this.edad = edad;
+            this.genero = genero;
+        }
+        
+        Persona.prototype.mostrarDatos = function () {
+              let resultado = "";
+              for (let i in this) {
+                if (typeof this[i] != "function") {
+                  resultado +=  i + " = " + this[i] + "<br>"
+                }
+              }
+              document.write("<hr>" + resultado) ;
+        }
+
+        function Estudiante(curso, grupo, nombre, edad, genero){
+            Persona.call(this, nombre, edad, genero);
+            this.curso = curso;
+            this.grupo = grupo;
+            this.regsitrar = function() {
+				document.write(`<br/> El alumno ${this.nombre} se ha registrado/a en el
+					 curso ${this.curso} y en el grupo ${this.grupo}`);
+			}
+        }
+
+        Estudiante.prototype = new Persona();
+        Estudiante.prototype.constructor = Estudiante;
+
+        function Profesor(asignatura, nivel, nombre, edad, genero) {
+            Persona.call(this, nombre, edad, genero);
+            this.asignatura = asignatura;
+            this.nivel = nivel;
+            this.asignar = function() {
+                document.write(`<br/> El profesor ${this.nombre} ha sido asignado/a en
+ 					la asignatura ${this.asignatura} del nivel  ${this.nivel}`);
+            }
+        }
+
+        Profesor.prototype = new Persona();
+        Profesor.prototype.constructor = Profesor;
+    </script>
+</html>

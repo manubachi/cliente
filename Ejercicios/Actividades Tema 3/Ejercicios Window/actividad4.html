@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Alarma</title>
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+		
+		<p>
+			Indica una hora para sonar la alarma
+			<input type="number" name="" id="hora" min="0" max="23"> : 
+			<input type="number" name="" id="min" min="0" max="59"> : 
+			<input type="number" name="" id="seg" min="0" max="59">
+		</p>
+		<br/>
+		<br/>
+		<div id="reloj"></div>
+
+		
+		<script type="text/javascript">
+				setInterval(function()
+				{
+
+					var fecha= new Date();
+	 				var hora=fecha.getHours();
+	                var minutos=fecha.getMinutes();
+	 				var segundos=fecha.getSeconds();
+
+	 				if (minutos<=9)
+	 					minutos="0"+minutos;
+	 				if (segundos<=9)
+	 					segundos="0"+segundos;
+
+	 				var mostrar="Hora actual: " + hora + ":" +minutos+ ":"+segundos;
+	 				document.getElementById("reloj").innerHTML=mostrar;
+	 				
+	 				
+
+	 				// si la hora actual coincide con la hora indicada...
+					if( fecha.getHours()==document.getElementById("hora").value &&
+						fecha.getMinutes()==document.getElementById("min").value &&
+						fecha.getSeconds()==document.getElementById("seg").value)
+					{
+						despierta();
+					} 
+				},1000);
+				
+				function despierta()
+						{
+							var x = prompt("¿Quieres seguir durmiendo ?");
+				       		if(x == "si" || x=="Si")
+				       		{
+				       			setTimeout("despierta()",120000);
+				         	 	alert("Descansa");
+
+				        	}
+				       		else if(x == "no" || x=="No")
+				        	{
+				        		alert("A por todas!!");
+				        	}
+				        	else
+				        		alert("Tienes que decir si o no.");
+						}
+
+		</script>
+		
+	</body>
+</html>

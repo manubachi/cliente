@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Ejercicio 2</title>
+  </head>
+  <body>
+    <p id="demo"></p>
+    <script type="text/javascript">
+
+      function generar() {
+        var url = "Enlace";
+        var aleatorio = Math.ceil(Math.random()*2);
+
+        switch(aleatorio)
+        {
+          case 0:
+            var resul = url.link("https://www.live.com/");
+            document.getElementById("demo").innerHTML = resul;
+            break;
+          case 1:
+            var resul = url.link("https://www.google.com/gmail/");
+            document.getElementById("demo").innerHTML = resul;
+            break;
+          case 2:
+            var resul = url.link("https://es.yahoo.com/");
+            document.getElementById("demo").innerHTML = resul;
+            break;
+          default:
+
+            break;
+
+        }
+      }
+      generar();
+    </script>
+    
+  </body>
+
+
+<html>

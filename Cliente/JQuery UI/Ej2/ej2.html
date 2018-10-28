@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="jquery-ui.js"></script>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>
+	  #lista {  margin: 0; padding: 0; width: 550px; }
+	  #lista li { list-style: none; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; border:1px solid; }
+	  #lista .ui-selecting { background: #FECA40; }
+  	  #lista .ui-selected { background: #F39814; color: white; }
+	  .oculto {visibility: hidden;}
+  	</style>
+
+
+</head>
+<body>
+	<ul id="lista">
+	  <li class="ui-state-default"><span>A</span></li>
+	  <li class="ui-state-default"><span>E</span></li>
+	  <li class="ui-state-default"><span>I</span></li>
+	  <li class="ui-state-default"><span>O</span></li>
+	  <li class="ui-state-default"><span>U</span></li>
+
+	</ul>
+	<button>Comprobar</button>
+
+	<div id="partida"></div>
+
+	<script>
+		var orden = ['A','E','I','O','U'];
+		var respuesta = [];
+		var aciertos = 0;
+		var intentos = 0;
+		var intento1 = [];
+		var intento2 = [];
+		var ganada = 0;
+		$(document).ready(function() {
+			$( "#lista" ).selectable({
+      			stop: function() {
+        			$( ".ui-selected", this ).each(function() {
+          				let valor = $(this).children('span').text();
+						$(this).children('span').removeClass('oculto');
+
+						let idx = respuesta.indexOf(valor);
+						while (idx == -1 && valor != "") {
+  							respuesta.push(valor);
+  							idx = respuesta.indexOf(valor, idx + 1);
+						}
+        			});
+      			}
+    		});
+			$('span').addClass('oculto');
+			$('button').on('click', comprueba);
+
+		});
+
+		function comprueba(e) {
+			e.preventDefault();
+			let oculto = 0;
+			//let visible = 0;
+			$("ul > li > span").each(function(){
+    			if ($(this).hasClass('oculto')){
+        			oculto++
+    			}/*else{
+        			visible++
+    			}*/
+			});
+			if(oculto == 0){
+				for (x=0;x<orden.length;x++)
+				{
+					if (orden[x] == respuesta[x])
+					{
+						aciertos++;
+					}
+				}
+
+				if (aciertos == 5) {
+					ganada++
+					$('button').off('click');
+					if (intentos < 1) {
+						intento1 = respuesta.slice();
+					}else {
+						intento2 = respuesta.slice();
+					}
+				}else{
+					$("<div>Sigue intentándolo</div>").dialog({
+						title: 'ESTADO DE LA PARTIDA'
+					});
+					if (intentos < 1) {
+						intento1 = respuesta.slice();
+					}else {
+							intento2 = respuesta.slice();
+					}
+					intentos++;
+					$('span').addClass('oculto');
+					
+					while(respuesta.length > 0){
+						respuesta.pop();
+					}
+				}
+
+				if (intentos == 2) {
+					$('button').off('click');
+					$("<div>¡¡Has perdido la partida!!</div>").dialog({
+						title: 'LO SIENTO'
+					});
+					$('span').removeClass('oculto');
+					$('#partida').append('<p> Intento 1: '+ intento1.join('-')+'</p>');
+					$('#partida').append('<p> Intento 2: '+ intento2.join('-')+'</p>');
+					setTimeout('location.reload()',5000);
+				}
+
+				if (ganada == 1) {
+					$('button').off('click');
+					$("<div>¡¡Has ganado la partida!!</div>").dialog({
+						title: 'ENHORABUENA'
+					});
+					$('#partida').append('<p> Intento 1: '+ intento1.join('-')+'</p>');
+					$('#partida').append('<p> Intento 2: '+ intento2.join('-')+'</p>');
+					return;
+				}
+			}else {
+				$("<div>Debes seleccionar todas las vocales</div>").dialog({
+					title: 'ERROR'
+				});
+			}
+		}
+	</script>
+</body>
+</html>

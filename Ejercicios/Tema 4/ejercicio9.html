@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Actividad 9</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<table border="3" id="tabla">
+		<tr align="center">
+			<td><font color="blue"><b>Alumno</b></font></td>
+			<td><font color="blue"><b>Nota Módulo 1</b></font></td>
+			<td><font color="blue"><b>Nota Módulo 2</b></font></td>
+			<td><font color="blue"><b>Nota Módulo 3</b></font></td>
+		</tr>
+
+		<tr align="center">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr align="center">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr align="center">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr align="center">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr align="center">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		var alumnos = new Array(5);
+
+		function introducir()
+		{
+			for (var i = 0; i < alumnos.length; i++) {
+				let estudiante = new Array(2);
+				let notas = new Array(3);
+				estudiante[0] = prompt(`Introduzca el nombre del alumno ${i+1} : `);
+
+				if(estudiante[0].length == 0){
+					alert("Debe introducir un nombre");
+					introducir();
+				}
+				notas[0] = parseInt(prompt(`Introduce la nota del módulo 1 :`));
+				notas[1] = parseInt(prompt(`Introduce la nota del módulo 2 :`));
+				notas[2] = parseInt(prompt(`Introduce la nota del módulo 3 :`));
+
+				if(notas.some(elem => elem < 0) || notas.some(elem => isNaN(elem)) || notas.some(elem => elem > 10 )){
+					alert(`Las notas deben ser mayor o igual que 0 y menores o igual que 10`);
+					introducir();
+				}
+
+				estudiante[1] = notas;
+
+				alumnos[i] = estudiante;
+			}
+			show();
+
+		}
+
+		function show()
+		{
+			// ALumno1
+			document.getElementById('tabla').rows[1].cells[0].innerHTML = alumnos[0][0];
+			document.getElementById('tabla').rows[1].cells[1].innerHTML = alumnos[0][1][0];
+			document.getElementById('tabla').rows[1].cells[2].innerHTML = alumnos[0][1][1];
+			document.getElementById('tabla').rows[1].cells[3].innerHTML = alumnos[0][1][2];
+
+			// Alumno 2
+			document.getElementById('tabla').rows[2].cells[0].innerHTML = alumnos[1][0];
+			document.getElementById('tabla').rows[2].cells[1].innerHTML = alumnos[1][1][0];
+			document.getElementById('tabla').rows[2].cells[2].innerHTML = alumnos[1][1][1];
+			document.getElementById('tabla').rows[2].cells[3].innerHTML = alumnos[1][1][2];
+
+			// Alumno 3
+			document.getElementById('tabla').rows[3].cells[0].innerHTML =  alumnos[2][0];
+			document.getElementById('tabla').rows[3].cells[1].innerHTML = alumnos[2][1][0];
+			document.getElementById('tabla').rows[3].cells[2].innerHTML = alumnos[2][1][1];
+			document.getElementById('tabla').rows[3].cells[3].innerHTML = alumnos[2][1][2];
+
+			// Alumno 4
+			document.getElementById('tabla').rows[4].cells[0].innerHTML = alumnos[3][0];
+			document.getElementById('tabla').rows[4].cells[1].innerHTML = alumnos[3][1][0];
+			document.getElementById('tabla').rows[4].cells[2].innerHTML = alumnos[3][1][1];
+			document.getElementById('tabla').rows[4].cells[3].innerHTML = alumnos[3][1][2];
+
+			// Alumno 5
+			document.getElementById('tabla').rows[5].cells[0].innerHTML = alumnos[4][0];
+			document.getElementById('tabla').rows[5].cells[1].innerHTML = alumnos[4][1][0];
+			document.getElementById('tabla').rows[5].cells[2].innerHTML = alumnos[4][1][1];
+			document.getElementById('tabla').rows[5].cells[3].innerHTML = alumnos[4][1][2];
+
+		}
+
+		introducir();
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<button>Mostrar tours</button>
+	<h2>Tours actuales</h2>
+	<div class="tour-0">
+	  <h3 class="name"></h3>
+	  <p class="price"></p>
+	</div>
+
+	<div class="tour-1">
+	  <h3 class="name"></h3>
+	  <p class="price"></p>
+	</div>
+
+	<div class="tour-2">
+	  <h3 class="name"></h3>
+	  <p class="price"></p>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('button').on('click', function() {
+				 $.getJSON("servidor.php",function(data){
+					 $.each(data, function( key, value ) {
+		   				$('div:eq('+(key+1)+')').children('h3').html('Destino: '+value.name)
+						$('div:eq('+(key+1)+')').children('p').html('Precio: '+ value.price+ '€')
+		 			});
+
+				});
+			})
+		});
+	</script>
+</body>
+</html>

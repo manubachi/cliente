@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 9</title>
+    <script type="text/javascript">
+			function muestraInfo(elEvento) {
+				var evento = elEvento || window.event;
+				var altura = window.innerHeight;
+				var ancho = window.innerWidth;
+				document.getElementById('height').value = altura + " px";
+				document.getElementById('width').value = ancho + " px";
+			}
+
+			window.onload = function() {
+				window.onresize = muestraInfo;
+			}
+		</script>
+  </head>
+  <body>
+  	<label for="width"> Ancho </label>
+  	<input type="text" id="width" readonly>
+
+  	<label for="height"> Altura </label>
+  	<input type="text" id="height" readonly>
+  </body>
+</html>

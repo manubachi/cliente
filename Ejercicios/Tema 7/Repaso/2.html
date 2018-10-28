@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 2</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		/*attr() solo te dará el valor de atributos HTML
+		y prop() te dará el valor de las propiedades del DOM de Javascript
+		para un elemento dado.
+		En versiones más nuevas de jQuery todas las propiedades boleanas
+		de los objetos del DOM se tienen que acceder por prop()
+		y se han desactivado en attr().
+		Por ejemplo campoCheck.attr("checked") se ha desactivado
+		para que no te devuelva ningún valor
+		y siempre deberías acceder por campoCheck.prop("checked").
+		attr es el estado inicial del atributos
+		prop estado actual de las propiedades
+		 */
+		
+	$(document).ready(function() {
+	  var checkbox = $("#checkbox");
+
+	  $("#button1").click(function() {
+	    checkbox.prop("checked", false);;
+	  });
+
+	  $("#button2").click(function() {
+	    checkbox.prop("checked", true);
+	  });
+
+	  $("#button3").click(function() {
+	    checkbox.attr("checked", false);
+	  });
+
+	  $("#button4").click(function() {
+	    checkbox.attr("checked", true);
+	  });
+	});
+	</script>
+
+</head>
+<body>
+	<input type="checkbox" id="checkbox" checked="checked" /> <br/>
+	<button id="button1">Desactivar prop</button><br />
+	<button id="button2">Reactivar prop</button><br />
+	<button id="button3">Desactivar attr</button><br />
+	<button id="button4">Reactivar attr</button><br />
+</body>
+</html>

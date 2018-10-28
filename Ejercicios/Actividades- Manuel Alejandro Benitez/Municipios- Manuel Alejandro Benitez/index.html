@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#provincia').on('click', function(){
+				$.ajax({
+					url: 'cargaMunicipiosJSON.php',
+					type: 'POST',
+					data: 'provincia='+$(this).val(),
+					success: respuestaMunicipios,
+					dataType:'json',
+				})
+				console.log($(this).val());
+			});
+
+			$.ajax({
+					url: 'cargaProvinciasJSON.php',
+					type: 'GET',
+					success: respuestaProvincias,
+					dataType:'json',
+				})
+		})
+
+		function respuestaProvincias(data, textsussces, objeto) {
+			$.each(data, function(key, val){
+				$('#provincia').append($(`<option value="${key}">${val}</option>`))
+			})
+		}
+
+		function respuestaMunicipios(data, textcontent, objeto){
+			$('#municipio > option:gt(0)').remove();
+
+			$.each(data, function(key, val){
+				$('#municipio').append($(`<option value="${key}">${val}</option>`))
+			})	
+		}
+	</script>
+</head>
+<body>
+	<label for="provincia">Provincias</label>
+	<select id="provincia">
+		<option>Seleccione una provincia</option>
+	</select>
+
+	<br>
+	<br>
+
+	<label for="municipio">Municipios</label>
+	<select id="municipio">
+		<option>Seleccione un Municipio</option>
+	</select>
+</body>
+</html>

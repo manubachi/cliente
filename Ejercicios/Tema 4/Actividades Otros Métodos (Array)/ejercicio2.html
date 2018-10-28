@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 2</title>
+    <script type="text/javascript">
+    // Relleno el array
+      var numeros = [1,5,2,3,4];
+
+        // Comprueba que todos son enteros positivos
+        document.write("¿Son todos enteros positivos? : " + numeros.every(elem => elem >= 0))
+
+        // Devuelve en un nuevo array el tripe de sus valores
+        var numerosTriple = numeros.map(num => num * 3);
+        document.write("<br/>Array triple : " + numerosTriple.join(" , "));
+
+        var multiplicado = numerosTriple.reduce((total,num) => total * num,1)
+        document.write("<br/>Array multiplicado : " + multiplicado);
+
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

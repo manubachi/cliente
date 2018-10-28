@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<!-- Coloque en la aplicación una imagen, y que se cambie por otra imagen, y ésta se mantenga
+mientras el usuario está pulsando algún botón del ratón, cuando suelte debe volver la primera
+imagen.
+ -->
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 6</title>
+		<script type="text/javascript">
+			function cambiar() {
+				f="imagen.jpg"; //ruta de la nueva imagen
+         		foto.src=f; //cambiar imagen
+			}
+
+			function volver() {
+				f="logo.jpg"; //ruta de la nueva imagen
+         		foto.src=f; //cambiar imagen
+			}
+
+			window.onload = function() {
+				document.onmousedown = cambiar;
+				document.onmouseup = volver;
+				document.onmouseout = volver;
+			}
+		</script>
+	</head>
+	<body >
+		<img id="foto" src="logo.jpg" width="400px" height="400px">
+	</body>
+</html>

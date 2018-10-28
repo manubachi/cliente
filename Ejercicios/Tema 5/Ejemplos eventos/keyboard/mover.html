@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+
+			div {width: 100px;
+				 height: 100px;
+				 background-color: green;
+				 position: absolute;
+				 
+				}
+
+
+		</style>
+		<script type="text/javascript">
+			
+			var arriba = 0;
+			var izquierda = 0;
+			function mover(e){
+
+				switch(e.code){
+					case 'ArrowUp': {caja.style.top = (arriba -= 10) + "px"; break;}
+					case 'ArrowDown': {caja.style.top = (arriba += 10 ) + "px"; break;}
+					case 'ArrowLeft': {caja.style.left = (izquierda -= 50) + "px"; break;}
+					case 'ArrowRight': {caja.style.left = (izquierda += 50) + "px"; break;}
+
+				}
+			}
+
+			window.onkeydown = mover;
+				
+		</script>
+
+	</head>
+	<body>
+		<div id='caja'></div>
+	</body>
+	</html>	

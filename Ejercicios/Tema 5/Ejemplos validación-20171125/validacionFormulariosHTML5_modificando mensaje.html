@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='es'>
+
+	<head>
+		<meta charset='utf-8'>
+		<script>
+		
+		    window.onload = function(){
+			    
+		    	id1.oninvalid = function(event) {
+				    event.target.setCustomValidity('Solo puede introducir caracteres alfabéticos de a - z');
+				}
+			    
+			}
+
+			
+
+		</script>
+
+	</head>
+
+	<body>
+
+		<p>Introduzca un mensaje y haga click en ok</p>
+	
+		<form>
+			<input id="id1" type="text" pattern='[a-z]+'>
+			<input type="submit" value='OK' id='validar'>
+	
+		</form>
+		
+		<p id="error"></p>
+
+		
+	</body>
+</html>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 3</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var fechaActual = new Date();
+
+
+			var fechaNac = new Date('1996-05-06');
+
+
+
+			var dias = fechaActual.getDate() -fechaNac.getDate();
+			var diasMesActual = new Date(fechaActual.getFullYear(),fechaActual.getMonth()+1,0).getDate();
+			var meses = fechaActual.getMonth() - fechaNac.getMonth();
+			var anyos = fechaActual.getFullYear() - fechaNac.getFullYear();
+
+			meses = meses <0? meses +12: meses;
+			dias = dias < 0? dias + diasMesActual: dias;
+
+			alert(`Tengo ${dias.toFixed()} dias, ${meses.toFixed()} meses y ${anyos.toFixed()} años `);
+
+			if(meses == 0 && dias == 0)
+				alert("FELIZ CUMPLEAÑOS!!!")
+
+
+		</script>
+
+	</body>
+</html>

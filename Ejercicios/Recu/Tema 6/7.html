@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 7</title>
+        <style media="screen">
+            table.miTabla{
+                border: 1px solid;
+                height: 200px;
+                width: 200px;
+            }
+
+            tr{
+                border: 1px solid;
+            }
+
+            td{
+                border: 1px solid;
+            }
+
+            .roja{
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="button" id="btnBorrar" value="Borrar fila">
+        <input type="button" id="btnInsertar" value="Insertar fila">
+    </body>
+
+    <script type="text/javascript">
+    window.onload = function(){
+        crear();
+        btnBorrar.addEventListener('click', borrar);
+        btnInsertar.addEventListener('click', insertar);
+    }
+    var tabla;
+    var filas;
+    var columnas;
+
+        function crear() {
+            tabla = document.createElement('table');
+            filas = parseInt(prompt('¿Cuántas filas deseas insertar en la tabla?'));
+            columnas = parseInt(prompt('¿Cuántas columnas deseas insertar en la tabla?'));
+
+            for (var i = 0; i < filas; i++) {
+                let f = tabla.insertRow();
+
+                for (let j = 0; j < columnas; j++) {
+                    let c = f.insertCell();
+                    c.appendChild(document.createTextNode(prompt('Introduce valor de la columna ' + (j+1) + ' de la fila ' + (i+1))));
+                }
+            }
+
+            tabla.setAttribute('class','miTabla');
+
+            document.body.appendChild(tabla);
+
+            let filasTabla = tabla.rows
+
+            for ( fil of filasTabla) {
+                let celdas = fil.cells;
+                for (cel of celdas) {
+                    cel.addEventListener('click', cambiar)
+                }
+            }
+        }
+
+        function cambiar(e) {
+            let filasTabla = tabla.rows
+
+            for ( fil of filasTabla) {
+                let celdas = fil.cells;
+                for (cel of celdas) {
+                    if (cel == e.target) {
+                        let nuevoValor = prompt('Introduce el nuevo valor de la columna');
+                        cel.textContent = nuevoValor;
+                    }
+                }
+            }
+        }
+
+        function borrar() {
+            let fila = parseInt(prompt('Introduce el nº de la fila a borrar')) -1 ;
+            if (tabla.rows.length - 1 < fila) {
+                alert('No existe esa fila');
+            }else {
+                tabla.deleteRow(fila);
+            }
+        }
+
+        function insertar() {
+            let posicion = parseInt(prompt('¿En qué posición quieres insertar la fila?')) - 1;
+            if (tabla.rows.length < posicion) {
+                alert('La tabla no es tan grande');
+            }else {
+                let f = tabla.insertRow(posicion);
+
+                for (let j = 0; j < columnas; j++) {
+                    let c = f.insertCell();
+                    c.appendChild(document.createTextNode(prompt('Introduce valor de la columna ' + (j+1))));
+                }
+            }
+            filas++;
+        }
+
+    </script>
+</html>

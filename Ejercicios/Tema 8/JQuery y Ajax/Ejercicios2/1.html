@@ -1,0 +1,54 @@
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<button class="ver-cursos">Ver Cursos</button>
+	<div class="cursos">
+	  <ul>
+          <li><b>1º DAW</b>
+              <ul class="alumnos1">
+
+              </ul>
+          </li>
+
+          <li><b>2º DAW</b>
+              <ul class="alumnos2">
+
+              </ul>
+          </li>
+	  </ul>
+	</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('button').on('click', function() {
+            $('.alumnos1').empty();
+            $('.alumnos2').empty();
+             $.getJSON("servidor.php",function(data){
+                 $.each(data, function( key, value ) {
+                    if (key == 0) {
+                        $('.alumnos1').append(`<li>Nombre: ${value[0].nombre}.
+                            DNI: ${value[0].dni}
+                            Acceso: ${value[0].acceso} </li>`)
+                        $('.alumnos1').append(`<li>Nombre: ${value[1].nombre}.
+                            DNI: ${value[1].dni}
+                            Acceso: ${value[1].acceso} </li>`)
+                    }else {
+                        $('.alumnos2').append(`<li>Nombre: ${value[0].nombre}.
+                            DNI: ${value[0].dni}
+                            Acceso: ${value[0].acceso} </li>`)
+                        $('.alumnos2').append(`<li>Nombre: ${value[1].nombre}.
+                            DNI: ${value[1].dni}
+                            Acceso: ${value[1].acceso} </li>`)
+                    }
+
+                });
+
+            });
+        })
+    });
+</script>
+</html>

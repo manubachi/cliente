@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 3</title>
+        <script src="limpiarCodigo.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <p>¿Elemento a insertar?</p>
+        <input type="text" id="elem">
+        <input type="button" id="add" value="Añadir">
+        <input type="button" id="del" value="Borrar nodos vacios">
+        <input type="button" id="clone" value="Clonar ultimo nodo">
+        <div id="mostrar">
+
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        var list = document.createElement('ul');
+        
+        window.onload = function() {
+            add.addEventListener('click', anyadir);
+            del.addEventListener('click', borrar);
+            clone.addEventListener('click', clonar);
+            document.addEventListener('keypress', function(e){
+                if(e.key == 'Enter'){
+                    anyadir();
+                }
+            });
+
+            list.id = 'lista';
+            mostrar.appendChild(list);
+        }
+
+        function anyadir() {
+            let li = document.createElement('li');
+            let texto = document.createTextNode(elem.value);
+            li.appendChild(texto);
+            lista.appendChild(li);
+            elem.value = '';
+        }
+
+        function clonar() {
+            if (lista.childNodes.length == 0) {
+                alert('No hay nodos que clonar');
+                return;
+            }
+            let clon = lista.lastChild.cloneNode(true);
+            lista.appendChild(clon);
+        }
+
+        function borrar() {
+            let elementos = lista.children;
+            for (l of elementos) {
+                if (l.firstChild.nodeValue == '') { //l.textContent
+                    l.parentNode.removeChild(l);
+                    borrar();
+                }
+            }
+            // hacer con for normal
+            // Tecla intro = añadir
+        }
+    </script>
+</html>

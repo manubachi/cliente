@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+    </body>
+    <script type="text/javascript">
+        window.onload = function() {
+            window.addEventListener("keydown", info);
+        }
+// hacerlo con un array
+        function info(e){
+            var evento = e || window.event;
+			if (evento.ctrlKey) {
+				console.log( "TECLA CONTROL ACTIVADA: tecla ='" + evento.key + "'");
+			}else if (evento.altKey) {
+				console.log( "TECLA ALT ACTIVADA: tecla ='" + evento.key + "'");
+			}else if (evento.shiftKey) {
+				console.log( "TECLA SHIFT ACTIVADA: tecla ='" + evento.key + "'");
+			}
+			else{
+				console.log( "tecla ='" + evento.key + "'");
+			}
+        }
+    </script>
+</html>

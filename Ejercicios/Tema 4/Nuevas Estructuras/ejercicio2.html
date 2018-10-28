@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 2</title>
+		<script type="text/javascript">
+
+			function Modulo(nombre,duracion,alumnos)
+			{
+				this.nombre = nombre;
+				this.duracion = duracion;
+				this.alumnos = alumnos;
+			}
+
+			var modulos = new WeakMap();
+
+			let modulo1 = new Modulo("DWECL",100,20);
+			let modulo2 = new Modulo("DWESE",150,25);
+			let modulo3 = new Modulo("DAW",70, 15);
+
+			modulos.set(modulo1,modulo1.alumnos);
+			modulos.set(modulo2,modulo2.alumnos);
+			modulos.set(modulo3,modulo3.alumnos);
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

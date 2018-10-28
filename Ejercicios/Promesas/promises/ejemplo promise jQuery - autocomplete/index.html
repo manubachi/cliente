@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+ @author Raúl Caro Pastorino
+ @copyright Copyright © 2017 Raúl Caro Pastorino
+ @license https://wwww.gnu.org/licenses/gpl.txt
+-->
+
+<!--
+↓ INSTRUCCIONES DEL EJERCICIO ↓
+
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <style type="text/css">
+        label {
+            display: block;
+            margin: 20px 0px;
+        }
+
+        #progressbar, #slider {
+            width: 300px;
+        }
+
+        form {
+            margin: 20px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./jquery-ui.js"></script>
+    <script>
+        var lenguajes = [];
+
+
+
+        var request = {    
+            lenguajes: function(){
+                var promise = $.Deferred();
+                $.ajax({
+                    url:'./servidorTags.php',
+                    dataType: 'json',
+                    success: function(data){
+                        promise.resolve(data);
+                    },
+                    error: function( jqXHR,  textStatus,  errorThrown){
+                        promise.reject(textStatus);
+                    }
+                });
+                return promise;
+            }
+        }
+
+        function crearAutocomplete(){
+            $('input[name="tags"]').autocomplete({
+                minLength: 1,  // Longitud mínima para empezar a buscar
+                source: lenguajes
+                
+            });
+        }
+
+        function rellenarInput(){
+            $('#tags2').val(lenguajes.toString());
+        }
+
+        window.onload = function() {
+        
+            // var request1 = request.lenguajes();
+            // request1.done(function(result) {
+            //     lenguajes = result;
+            //     $('input[name="tags"]').autocomplete({
+            //         minLength: 1,  // Longitud mínima para empezar a buscar
+            //         source: lenguajes
+                    
+            //     });
+            // }).fail(function(error){
+            //     console.log(error);
+            // });
+            
+            
+
+            $.when(request.lenguajes()).then(function(result){
+                lenguajes = result;
+                crearAutocomplete(); 
+                rellenarInput();
+            });
+
+
+
+            
+
+        }
+    </script>
+</head>
+
+<body>
+<h1>Formulario de registro</h1>
+<form id="formulario">
+
+    <label>Lenguajes de programación que conoces
+        <input type='text' name='tags' id="tags1" size="50" />
+    </label>
+
+    <label>Lenguajes de programación que conoces
+        <input type='text' id="tags2" size="50" />
+    </label>
+
+</form>
+</body>
+</html>

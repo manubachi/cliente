@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+
+
+	<head>
+		<meta charset="utf-8"/>
+
+		<title>Actividad 6</title>
+	</head>
+
+	<body>
+		Color: <input type="color" id="color" value="#000000" /><br/>
+		<input type="button" value="Cambiar Fondo" id="cambia "onclick="cambiar()"/>
+		<script type="text/javascript">
+
+
+			function cambiar()
+			{
+				window.opener.document.body.style.backgroundColor = document.getElementById('color').value
+
+				window.opener.codigo.value = document.getElementById('color').value ;
+			}
+		</script>
+	</body>
+</html>

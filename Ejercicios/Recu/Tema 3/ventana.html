@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ventana nueva</title>
+    </head>
+    <body>
+        <input type="button" id="izq" value="Izquierda">
+        <input type="button" id="der" value="Derecha">
+    </body>
+
+    <script type="text/javascript">
+        document.getElementById('izq').addEventListener("click", moverIzq);
+        document.getElementById('der').addEventListener("click", moverDer);
+
+        function moverIzq(){
+            let valor = window.opener.document.getElementById('valor').value;
+            window.moveBy(-valor,0);
+        }
+
+        function moverDer(){
+            let valor = window.opener.document.getElementById('valor').value;
+            window.moveBy(valor,0);
+        }
+
+
+    </script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 1</title>
+		<script type="text/javascript">
+			var modulos = new Map();
+
+			modulos.set("DWECL","Desarrollo Web Entorno Cliente");
+			modulos.set("DWESE","Desarrollo Web Entorno Servidor");
+			modulos.set("DAW","Despliegue Aplicaciones Web");
+
+			document.write("<b>a. Muestra cuantos modulos hay almacenados</b> " + modulos.size + "<hr>");
+
+			document.write(`<br><b>b. Muestra el contenido de la estructura </b> <br/>`);
+			for (let [k,v] of modulos) {
+				document.write(`${k} = ${v} <br/>`);
+			}
+
+			document.write(`<hr><br><b>c. Devuelve la abreviatura de los módulos  </b> <br/>`);
+			for (let [k,v] of modulos) {
+				document.write(`${k}<br/>`);
+			}
+
+			document.write(`<hr><br><b>d. Devuelve el nombre completo de los módulos  </b> <br/>`);
+			for (let [k,v] of modulos) {
+				document.write(`${v}<br/>`);
+			}
+
+			document.write(`<hr><br><b>e. Comprueba si está el módulo "DAW" y lo elimina </b> <br/>`);
+			if (modulos.has('DAW')) {
+				modulos.delete('DAW');
+				for (let [k,v] of modulos) {
+					document.write(`${k} = ${v}<br/>`);
+				}
+			}else{
+				document.write(`No se encuentra el módulo "DAW"`)
+			}
+			
+			
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

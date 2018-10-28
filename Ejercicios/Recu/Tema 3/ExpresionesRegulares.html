@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Expresiones Regulares</h1>
+        <script type="text/javascript">
+            // 1.Expresion regular que valide : ‘Nov, Noviembre, November’
+            /*var exp = /(Nov|November|Noviembre)/i;
+            console.log(exp.test('Hola Mundo'));
+            console.log(exp.test('Noviembre'));
+            console.log(exp.test('November'));
+            console.log(exp.test('Estamos en Noviembre'));
+            console.log(exp.test('Estamos en noviembre'));*/
+
+            /*var exp2 = /Nov(iembre|ember)?/i;
+            console.log(exp2.test('Hola Mundo'));
+            console.log(exp2.test('Noviembre'));
+            console.log(exp2.test('November'));
+            console.log(exp2.test('Estamos en Noviembre'));
+            console.log(exp2.test('Estamos en noviembre'));
+            console.log(exp2.test('Nov'));*/
+
+            // 2.Eliminar los espacios con split y expresiones regulares.
+	        var s = 'dwecl     ,    dwese   ,        fol';
+            var s2 = s.split(/\s*\,\s*/);
+            console.log(s2)
+
+            /*3, Eliminar etiquetas <script> */
+        </script>
+    </body>
+</html>

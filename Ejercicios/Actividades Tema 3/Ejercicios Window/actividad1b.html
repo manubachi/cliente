@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Window</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<form>
+			<input type="button" value="MoveTo" onclick="moverAbs()">
+			<input type="button" value="MoveBy" onclick="moverRel()">
+			<input type="button" value="ResizeTo" onclick="redAbs()">
+			<input type="button" value="ResizeBy" onclick="redRel()">
+			<input type="button" value="Cerrar Ventana" onclick="window.opener.close()">
+		</form>
+
+		<script type="text/javascript">
+				function moverAbs()
+				{
+	
+					window.moveTo(500,150);
+										
+				}
+
+				function moverRel()
+				{
+					window.moveBy(0,50);
+	
+				}
+
+				function redAbs()
+				{
+					window.resizeTo(500,500);
+					
+				}
+
+				function redRel()
+				{
+					
+					window.resizeBy(-50,-50);
+	
+				}
+
+
+
+		</script>
+	</body>
+</html>

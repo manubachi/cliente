@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function muestraInformacion(elEvento) {
+		  var evento = elEvento || window.event;
+
+		  //pantalla
+		  var coordenadaX = evento.screenX;
+		  var coordenadaY = evento.screenY;
+		  alert("Has pulsado el ratón en la posición: " + coordenadaX + ", " + coordenadaY + " respecto a la pantalla");
+
+		  //navegador
+		  coordenadaX = evento.clientX;
+		  coordenadaY = evento.clientY;
+		  alert("Has pulsado el ratón en la posición: " + coordenadaX + ", " + coordenadaY + " respecto a la ventana del navegador");
+		 
+		  //página web
+		   var ie = navigator.userAgent.toLowerCase().indexOf('msie')!=-1;
+   		   if(ie) {
+			  coordenadaX = evento.clientX + document.body.scrollLeft;
+			  coordenadaY = evento.clientY + document.body.scrollTop;
+			}
+			else {
+			  coordenadaX = evento.pageX;
+			  coordenadaY = evento.pageY;
+			}
+			alert("Has pulsado el ratón en la posición: " + coordenadaX + ", " + coordenadaY + " respecto de la página web");
+		}
+		 
+		document.onclick = muestraInformacion;
+
+	</script>
+</head>
+<body>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur ea reiciendis, cumque reprehenderit nam commodi pariatur magni illo accusamus sapiente assumenda aspernatur modi explicabo repellat, ab maiores sed praesentium voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, modi, quidem! Esse quasi eligendi ipsum, nam quidem dolor tenetur et suscipit optio consectetur maxime illum molestiae veniam inventore ratione quibusdam.</p>
+</body>
+</html>

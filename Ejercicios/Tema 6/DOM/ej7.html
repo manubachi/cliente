@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 7</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var filas = parseInt(prompt(`Introduce nº de filas de la tabla`));
+            var columnas = parseInt(prompt(`Introduce nº de columnas de la tabla`));
+            var tabla;
+        function crear(){
+            tabla = document.createElement("table");
+            for (let i = 0; i < filas; i++) {
+                var f = document.createElement("tr");
+                for (let j = 0; j < columnas; j++) {
+                    let c = document.createElement("td");
+                    let valorCelda = document.createTextNode(
+                        prompt('Introduce el valor de la columna '+ (j+1) +
+                        " de la fila "+ (i+1)));
+
+                    c.appendChild(valorCelda);
+
+                    let ali = document.createAttribute("align");
+                    ali.nodeValue = 'center';
+                    c.setAttributeNode(ali);
+
+
+                    f.appendChild(c);
+                }
+                tabla.appendChild(f);
+            }
+            let bor = document.createAttribute("border");
+            bor.nodeValue = '1';
+            tabla.setAttributeNode(bor);
+            let alt = document.createAttribute("height");
+            alt.nodeValue = '200';
+            tabla.setAttributeNode(alt);
+            let an = document.createAttribute("width");
+            an.nodeValue = '200';
+            tabla.setAttributeNode(an);
+
+
+            document.body.appendChild(tabla);
+
+            let celdas = document.getElementsByTagName('td');
+            for (c of celdas){
+                c.onclick = cambiar;
+            }
+        }
+
+        function borrar(){
+            let b = parseInt(prompt("¿Qué fila desea borrar? "));
+            if (b <= 0 || b>filas) {
+                alert("El Nº de la fila debe estar entre 1 y " + filas);
+                return;
+            }
+            tabla.removeChild(tabla.childNodes[b-1]);
+        }
+
+        function insertar(){
+            let fi = document.createElement("tr");
+            for (let j = 0; j < columnas; j++) {
+                let c = document.createElement("td");
+                let valorCelda = document.createTextNode(
+                    prompt('Introduce el valor de la columna '+ (j+1)));
+                c.appendChild(valorCelda);
+                let ali = document.createAttribute("align");
+                ali.nodeValue = 'center';
+                c.setAttributeNode(ali);
+                c.onclick = cambiar;
+
+                fi.appendChild(c);
+            }
+            tabla.appendChild(fi);
+        }
+
+        function cambiar(e){
+            let celdas = document.getElementsByTagName('td')
+            for (c of celdas){
+                if (c == e.target) {
+                    let v = document.createTextNode(prompt("Introduce el nuevo valor"));
+                    c.replaceChild(v,c.childNodes[0]);
+                }
+            }
+        }
+
+        crear();
+        </script>
+        <input type="button" id="borrar" value="Borrar fila" onclick="borrar()">
+        <input type="button" id="insertar" value="Insertar fila" onclick="insertar()">
+    </body>
+</html>

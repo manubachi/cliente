@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="jquery-ui.js"></script>
+	<link href="jquery-ui.css" rel="stylesheet">
+	
+	<style>
+	 
+ 	.container {
+	  				display: flex; 
+	  				justify-content: center;
+	  				min-height: 150px;
+	  				align-items:center;
+	}
+
+	  .drag,.drop {  width: 250px; text-align: center;border: 1px solid; font-size: 1.5em;}
+
+	  .drop {background-color: blue; color:white;}
+	  
+	   
+	 
+  	</style>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="drag"><p>$('#selector')</p></div>
+	    <div class="drag"><p>getElementById()</p></div>
+	    <div class="drag"><p>$.each()</p></div>
+	    <div class="drag"><p>send()</p></div>
+	    <div class="drag"><p>$.post()</p></div>	
+	</div>
+	<div ></div>  
+	<div class="container">
+		<div class="drop"><p>JAVASCRIPT</p></div>
+	    <div class="drop"><p>JQUERY</p></div>	
+	</div>
+	  
+	<script>
+	  $( function() {
+	    $( ".drag" ).draggable({ revert: "valid" });
+	    //$( "#draggable2" ).draggable({ revert: "invalid" });
+	 
+	    $( ".drop" ).droppable({
+	      classes: {
+	        "ui-droppable-active": "ui-state-active",
+	        "ui-droppable-hover": "ui-state-hover"
+	      },
+	      drop: function( event, ui ) {
+	        $( this )
+	          .addClass( "ui-state-highlight" )
+	          .find( "p" )
+	            .html( "Dropped!" );
+	      }
+	    });
+	  } );
+  </script>
+	
+
+	
+</body>
+</html>

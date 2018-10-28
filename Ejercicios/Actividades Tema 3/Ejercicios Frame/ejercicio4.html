@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Actividad 4</title>
+	</head>
+
+	<body>
+
+			<input type="button" value="Lanzar" OnClick="lanza()"><HR>
+			<form name="datos">
+			El resultado 2 ha salido :<input type="text"  id="2"><BR>
+			El resultado 3 ha salido :<input type="text"  id="3"><BR>
+			El resultado 4 ha salido :<input type="text"  id="4"><BR>
+			El resultado 5 ha salido :<input type="text"  id="5"><BR>
+			El resultado 6 ha salido :<input type="text"  id="6"><BR>
+			El resultado 7 ha salido :<input type="text"  id="7"><BR>
+			El resultado 8 ha salido : <input type="text"  id="8"><BR>
+			El resultado 9 ha salido : <input type="text"  id="9"><BR>
+			El resultado 10 ha salido : <input type="text"   id="10"><BR>
+			El resultado 11 ha salido : <input type="text"   id="11"><BR>
+			El resultado 12 ha salido : <input type="text"   id="12"><BR>
+			</form>
+		<script type="text/javascript">
+			// Array para guardar el número de veces que aparece cada número
+
+			function lanza()
+         	{
+         		var frec=new Array(12).fill('0');
+        		var mostrar = "";
+		       	for(i=0 ; i<10; i++)
+		       	{
+		       		// Genera los valores aleatorios de los dados
+		        	dado1 = Math.ceil(Math.random()*6);
+		        	dado2 = Math.ceil(Math.random()*6);
+
+		        	// Suma los dos numeros de los dados
+		            tirada = dado1 + dado2 ;
+		            //En el array frec en la posición de la suma se añade 1
+		            frec[tirada] += 1;
+
+		            mostrar += "Tirada " +(i+1)+ ": "+ tirada+ "\n";
+		       	}
+		       	alert(mostrar);
+
+		       	// Pinta los datos en los text del form datos
+		       	for(i=2 ; i<13; i++)
+               	{
+               		document.datos[i-2].value=frec[i]  ;
+               	}
+
+           	}
+
+
+		</script>
+	</body>
+</html>

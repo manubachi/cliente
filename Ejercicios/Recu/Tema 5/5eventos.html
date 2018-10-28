@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 5</title>
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            border: 1px solid;
+            }
+    </style>
+    <script type="text/javascript">
+			function cambiaFondo(elEvento) {
+				var evento = elEvento || window.event;
+				switch(evento.type){
+					case 'mousedown':
+						caja.style.backgroundColor = "#FFFF00";
+						//pantalla
+						var coordenadaX = evento.screenX;
+						var coordenadaY = evento.screenY;
+						console.log("Has pulsado el ratón en la posición: " + coordenadaX + ", " + coordenadaY + " respecto a la pantalla");
+
+						//navegador
+						coordenadaX = evento.clientX;
+						coordenadaY = evento.clientY;
+						console.log("Has pulsado el ratón en la posición: " + coordenadaX + ", " + coordenadaY + " respecto a la ventana del navegador");
+						break;
+					case 'mousemove':
+						caja.style.backgroundColor = "white";
+						break;
+					case 'keydown':
+						caja.style.backgroundColor = "#CCE6FF";
+						console.log( "Keydown Event: tecla ='" + evento.key + "' | código ='" + evento.code + "'");
+						break;
+				}
+
+
+
+			}
+
+			window.onload = function() {
+				caja.onmousedown = cambiaFondo;
+      			caja.onmousemove = cambiaFondo;
+      			document.addEventListener("keydown", cambiaFondo);
+
+			}
+		</script>
+  </head>
+  <body>
+      <div id="caja">
+
+      </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <img src="realmadrid.jpg" id="foto">
+        <p id="resul"></p>
+    </body>
+    <script type="text/javascript">
+        window.onload = function() {
+            foto.addEventListener("mouseenter", function() {
+                resul.innerHTML = this.src;
+            });
+
+            foto.addEventListener("mouseout", function() {
+                resul.innerHTML = "";
+            });
+        }
+    </script>
+</html>

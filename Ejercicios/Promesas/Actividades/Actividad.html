@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actividad</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style type="text/css">
+            #div-provincia {
+                background-color: rgb(209, 209, 209);
+            }
+
+            numHabitantes {
+                font-weight: bold;
+            }
+
+            #div-municipios {
+                background-color: rgb(155, 216, 155);
+            }
+
+            ul li:hover {
+                background-color: rgb(129, 180, 129); 
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div>
+            <form>
+                <label>Codigo de provincia (01-50)</label>
+                <input type="text">
+                <br>
+                <input type="submit" value="Buscar">                
+            </form>
+        </div>
+
+        <div id="div-provincia"></div>
+        <div id="div-municipios"></div>
+
+        <script src="../jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            var divProvincia  = $('#div-provincia');
+            var divMunicipios = $('#div-municipios');
+
+            $('form').on('submit', function(e){
+                e.preventDefault();
+
+                var codigoProvincia = $('input[type="text"]').val();
+
+                if (codigoProvincia.length < 2) {
+                    codigoProvincia = '0' + codigoProvincia;
+                }
+
+                divProvincia.empty();
+                divMunicipios.empty();
+
+                // UTILIZAR AQUI LAS PROMESAS
+
+                var p1 = promesaProvincia(codigoProvincia);
+                var p2 = promesaMunicipio(codigoProvincia);
+                //var p3 = devolverPromesa('pinguino');
+
+                var promesas = [p1,p2];
+
+                // EN ESTE CASO EL PARAMETRO DEL WHEN NO ES UN ARRAY
+                // Y EL THEN NO RECIBE UN ARRAY CON LOS PARAMETROS,
+                // SINO TANTOS COMO PROMESAS HAYA
+                $.when(...promesas).then(function(...funcion){
+                    $('#div-provincia').append('<p> Provincia: '+funcion[0]+'</p>')
+                    $('#div-municipios').append(funcion[1])
+                });  
+
+                   
+
+
+                /////////////////////////////
+
+            });
+
+            // CREAR LAS PROMESAS
+
+            function promesaProvincia(provincia){
+                var promise = $.Deferred();
+
+                $.ajax({
+                    url: 'cargaProvinciasJSON.php',
+                    type: 'POST',
+                    data: 'provincia=' + provincia,
+                    success: function (data) {
+                        // El metodo resolve se coge desde la promesa
+                        promise.resolve(data); 
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // El metodo reject se coge desde la promesa
+                        promise.reject(textStatus); // ALGO HA IDO MAL
+                        errorDatos();
+                    }
+                });                
+
+                return promise;
+            }
+
+            function promesaMunicipio(provincia){
+                var promise = $.Deferred();
+
+                $.ajax({
+                    url: 'cargaMunicipiosJSON.php',
+                    type: 'POST',
+                    data: 'provincia=' + provincia,
+                    success: function (data) {
+                        // El metodo resolve se coge desde la promesa
+                        promise.resolve(data); // TODO HA IDO BIEN
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // El metodo reject se coge desde la promesa
+                        promise.reject(textStatus); // ALGO HA IDO MAL
+                        errorDatos();
+                    }
+                });                
+
+                return promise;
+            }
+           
+            /////////////////////
+
+            function errorDatos(error){
+                console.error(error.message);
+                alert('Ha ocurrido un error al intentar cargar los datos');
+            }
+        
+        </script>
+    </body>
+
+</html>

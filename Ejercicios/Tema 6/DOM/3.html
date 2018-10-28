@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio 3</title>
+    <script type="text/javascript">
+      window.onload = function(){
+        anyade.onclick = anyadir;
+        borrar.onclick = borra;
+        clonar.onclick = clona;
+      }
+
+      function anyadir(){
+	    let elem = document.createElement("li");
+
+        let texto = document.getElementById('introducir').value;
+        let text = document.createTextNode(texto);
+
+        elem.appendChild(text);
+        lista.appendChild(elem);
+
+        document.getElementById('introducir').value = '';
+
+      }
+
+      function borra(){
+        if (lista.childNodes.length == 1) {
+          alert("Aún no hay nodos insertados");
+          return;
+        }
+        let elementos = document.getElementsByTagName('li');
+        for (let l of elementos) {
+            if (l.childNodes[0].nodeValue == '') {
+                l.parentNode.removeChild(l);
+                borra();
+            }
+        }
+      }
+
+      function clona(){
+          let clonado = lista.lastChild;
+          let cln = clonado.cloneNode(true);
+
+          lista.appendChild(cln);
+      }
+    </script>
+  </head>
+  <body>
+    <label for="introducir">Elemento a insertar</label>
+    <input type="text" name="introducir" id="introducir">
+    <input type="button" name="anyade" id="anyade" value="Añadir">
+    <input type="button" name="borrar" value="Borrar nodos vacios" id="borrar">
+    <input type="button" name="clonar" value="Clonar último nodo" id="clonar">
+    <ul id="lista">
+
+    </ul>
+  </body>
+</html>

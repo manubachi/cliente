@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 2</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div id="mostrar"></div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.getJSON("personas.php",function(data){
+            $.each(data, function( key, value ) {
+                $('#mostrar').append("<input type='radio' name='personas' value='"+value.id +"' />"+ value.id +" <br>" );
+            });
+
+            $('input').on('click', function() {
+            	let valor = $(this).val()-1;
+            	alert('Nombre: ' + data[valor].nombre + '\n' 
+            		+ 'DNI: ' + data[valor].dni);
+            });
+		})
+	})
+</script>
+</html>

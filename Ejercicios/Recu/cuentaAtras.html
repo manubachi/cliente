@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cuenta Atras</title>
+    </head>
+    <body>
+        Introduce los minutos <input type="number" id="min">
+        <br>
+        Introduce los segundos<input type="number" id="sec">
+        <br>
+        <p id="tiempo"></p>
+
+        <button id="iniciar">Iniciar</button>
+        <button id="para">Parar</button>
+
+        <script>
+        var intervalo;
+        var fecha;
+        window.onload = function() {
+            iniciar.addEventListener('click', cuentaAtras);
+            para.addEventListener('click', parar);
+            //stop.addEventListener('click', parar);
+        }
+
+        function cuentaAtras() {
+            var minutos = min.value;
+            var segundos = sec.value
+            fecha = new Date();
+            fecha.setMinutes(minutos,segundos);
+            if (segundos <= 0 && minutos <=0) {
+                alert('Los segundos al menos deben ser mayor que 0')
+            } else {
+                var tiempo = document.getElementById('tiempo');
+                intervalo = setInterval(contador, 1000);
+            }
+        }
+
+        function parar(){
+            clearInterval(intervalo);
+            alert('TIEMPO');
+        }
+
+        function contador(){
+            var segundosActual = fecha.getSeconds() - 1;
+            fecha.setSeconds(segundosActual);
+
+            if(fecha.getSeconds() < 10){
+                tiempo.innerHTML = fecha.getMinutes()+':0'+fecha.getSeconds();
+            }else{
+                tiempo.innerHTML = fecha.getMinutes()+':'+fecha.getSeconds();
+            }
+
+            if (fecha.getMinutes() == 0 && fecha.getSeconds() == 0) {
+                parar()
+
+            }
+        }
+        </script>
+    </body>
+</html>

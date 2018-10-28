@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio 1</title>
+    <script>
+      window.onload = function(){
+          cambiar.onclick = cambia;
+      }
+
+      function cambia() {
+         let opciones =  document.getElementsByTagName('option');
+         for(let o of opciones){
+            if (o.selected) {
+              switch(o.value){
+                case 'a':
+                  let enlaces = document.getElementsByTagName('a');
+                  for (let e of enlaces) {
+                      e.style.color = 'red';
+                  }
+                  break;
+                case 'd':
+                  let partes = document.getElementsByTagName('div');
+                  for (let p of partes) {
+                      let alineacion = document.createAttribute('align');
+                      alineacion.value = 'center';
+                      p.setAttributeNode(alineacion);
+                  }
+                  break;
+                case 'pa':
+                  let parrafos = document.getElementsByTagName('p');
+                  for (let p of parrafos) {
+                      p.style.backgroundColor = 'red';
+                  }
+
+                  break;
+              }
+            }
+         }
+      }
+    </script>
+  </head>
+  <body>
+    <p id="parrafo1">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+      qui officia deserunt mollit anim id est laborum.
+    </p>
+
+    <p id="parrafo2">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+      pariatur. Excepteur sint occaecat cupidatat non proident,
+      sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <br>
+
+    <a id="link" href="www.google.com">Enlace 1</a>
+    <br>
+    <a id="link1" href="www.google.com">Enlace 2</a>
+    <br>
+
+    <div id='parte' >
+      Esto está dentro de un div
+    </div>
+
+    <br>
+
+    <div id='parte1' >
+      Esto está dentro de un div también
+    </div>
+
+    <br>
+
+    <select name="selec" id="selec">
+      <option selected>Selecione una opción</option>
+      <option value="a">Enlaces</option>
+      <option value="pa">Párrafos</option>
+      <option value="d">Div</option>
+    </select>
+    <br>
+    <input type="button" id="cambiar" value="Cambiar" />
+
+  </body>
+</html>

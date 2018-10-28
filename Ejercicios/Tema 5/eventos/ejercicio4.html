@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<!-- Realizar un evento que muestre la url que tiene asociada cada imagen, cada vez que se pase el
+ratón por encima de ella.
+ -->
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 4</title>
+		<script type="text/javascript">
+			function mostrar() {
+				texto.innerHTML = this.src;
+			}
+			function quitar() {
+				texto.innerHTML = "";
+			}
+
+			window.onload = function() {
+				foto.onmousemove = mostrar;
+				foto.onmouseout = quitar;
+			}
+		</script>
+	</head>
+	<body >
+		<img id="foto" src="logo.jpg">
+		<div id="texto"></div>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 6</title>
+    </head>
+    <script type="text/javascript">
+        window.onload = function(){
+          genera.onclick = generar;
+          //comp.onclick = borrar;
+        }
+
+        function generar(){
+            borrar();
+            let num1 = Math.ceil(Math.random()*20);
+            let num2 = Math.ceil(Math.random()*20);
+
+            let elem = document.createElement("input");
+            elem.value = num1;
+            let elem1 = document.createElement("input");
+            elem1.value = num2;
+
+            generados.insertBefore(elem,generados.childNodes[0]);
+            generados.insertBefore(elem1,generados.childNodes[1]);
+        }
+
+        function borrar(){
+            if (generados.childNodes.length == 3){
+                return;
+            }
+            generados.removeChild(generados.childNodes[0]);
+            generados.removeChild(generados.childNodes[0]);
+        }
+    </script>
+    <body>
+        <div id="generados">
+            <input type="button" id="genera" value="Genera"/>
+        </div>
+
+        <div id="comparados">
+            <input type="button" id="comp" value="Compara"/>
+        </div>
+
+    </body>
+</html>

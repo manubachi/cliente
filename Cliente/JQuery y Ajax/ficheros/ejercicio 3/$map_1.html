@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<button class="update-available-flights">Ver vuelos</button>
+	<div class="flights">
+	  <ul class="flight-times">
+
+	  </ul>
+	</div>
+
+</body>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('button').on('click', function() {
+				 $.getJSON("servidor.php",function(data){
+					let a = $.map(data, function( key, value ) {
+					 	/*let linea = $('<li></li>');
+					 	let numero = key.flightNumber;
+					 	let fecha = key.time;
+    					linea.text(numero+'-'+fecha);*/
+						return $(`<li>${key.flightNumber}-${key.time}</li>`);
+		 			});
+					$('.flight-times').append(a);
+
+				});
+			})
+		});
+	</script>
+</html>

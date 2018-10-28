@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio Repaso 1</title>
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(h);
+
+    	function a() {
+    		$('ul').remove();
+    	}
+
+    	function b() {
+    		$("ul").html('<li>Primer item.</li><li>Segundo item.</li><li>Tercer item.</li> <li>Cuarto item.</li>');
+    	}
+
+    	function c()  {
+		     $("ul").append("<li>Elemento añadido al final</li>");
+		}
+
+		function d()  {
+		     $("ul").prepend("<li>Elemento añadido al principio</li>");
+		}
+
+		function e() {
+		  $("li:last").remove();
+		}
+
+		function f() {
+		  $("li").first().remove();
+		}
+
+		function g() {
+		   $("li:lt(2)").remove();
+		}
+
+		function h()  {
+		   $("li:gt(-3)").remove();    
+
+		}
+    </script>
+</head>
+<body>
+	<ul>
+		<li>Elemento 1</li>
+		<li>Elemento 2</li>
+		<li>Elemento 3</li>
+		<li>Elemento 4</li>
+	</ul>
+</body>
+</html>

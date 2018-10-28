@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="jquery-ui.js"></script>
+	<style type="text/css">
+		label{display: block;
+			  margin:20px 0px;}
+
+
+	    #progressbar, #slider{
+			width: 300px;
+	    }
+
+	    form {margin:20px;}
+
+	</style>
+
+</head>
+<body>
+	<h1>Formulario de registro CFGS DAW - IES DOÑANA</h1>
+	<form>
+		<label> Nombre:
+			<input type='text' id='name' name='name'>
+		</label>
+		<label> Fecha de nacimiento:
+			<input type='text' id='date' name='date'>
+		</label>
+		<label> Sexo:
+			<select id="gender" name='gender'>
+		      <option value="f" data-class="avatar" data-style="background-image: url(images/female.png);" >Mujer</option>
+		      <option value="m" data-class="avatar" data-style="background-image: url(images/male.png);" >Hombre</option>
+		      <select>
+		</label>
+		<fieldset>
+			<legend>Últimos estudios realizados:</legend>
+			<label for="radio-1">ESO</label>
+		    <input type="radio" name="studies" id="radio-1">
+		    <label for="radio-2">Bachillerato</label>
+		    <input type="radio" name="studies" id="radio-2">
+		    <label for="radio-3">CF</label>
+		    <input type="radio" name="studies" id="radio-3">
+		    <label for="radio-4">Otros</label>
+		    <input type="radio" name="studies" id="radio-4">
+		</fieldset>
+
+		<fieldset>
+	    <legend>Módulos: </legend>
+	    <label>Programación
+	    	<input type="checkbox" name="subjects" value='prog'>
+	    </label>
+	    <label>Entornos de desarrollo
+	    	<input type="checkbox" name="subjects" value='ent' >
+	    </label>
+	    <label>Lenguaje de marcas
+			<input type="checkbox" name="subjects" value='leng'>
+	    </label>
+	    <label>Sistemas informáticos
+			<input type="checkbox" name="subjects" value='sist'>
+	    </label>
+	    <label>FOL
+			<input type="checkbox" name="subjects" value='fol'>
+	    </label>
+	  </fieldset>
+	  	<p>Módulos en los que se desea matricular</p>
+	  	<div id="slider" name ='amount'>
+		  <div id="custom-handle" class="ui-slider-handle"></div>
+		</div>
+		<label>Lenguajes de programación que conoces
+			<input type='text' name='tags' id="tags" size="50">
+		</label>
+		<br>
+		<br>
+
+		<div>
+			<button>Reset</button>
+			<button>Enviar</button>
+			<button>Imprimir</button>
+		</div>
+
+		<div id="mostrar">
+
+		</div>
+
+	</form>
+</body>
+<script>
+	var slider;
+	var handle;
+	$.datepicker.regional['es'] = {
+ 		closeText: 'Cerrar',
+		 prevText: '< Ant',
+		 nextText: 'Sig >',
+		 currentText: 'Hoy',
+		 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+		 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+		 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+		 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+		 weekHeader: 'Sm',
+		 dateFormat: 'dd/mm/yy',
+		 firstDay: 1,
+		 isRTL: false,
+		 showMonthAfterYear: false,
+		 yearSuffix: '',
+		 showOn: "button",
+		 buttonImage: "images/calendar.png",
+      	buttonImageOnly: true,
+      	buttonText: "Selecciona una fecha",
+		maxDate: "-18Y"
+		 //buttonImage:"images/calendar.png"
+ 	};
+
+$.datepicker.setDefaults($.datepicker.regional['es']);
+$( function() {
+	$.widget("custom.iconselectmenu", $.ui.selectmenu, {
+  		_renderItem: function (ul, item) {
+	  		var li = $("<li>"),
+	  		wrapper = $("<div>", { text: item.label });
+
+	  		if (item.disabled) {
+	  			li.addClass("ui-state-disabled");
+	  		}
+
+	  		$("<span>", {
+	  			style: item.element.attr("data-style"),
+	  			"class": "ui-icon " + item.element.attr("data-class")
+			})
+	  		.appendTo(wrapper);
+
+  			return li.append(wrapper).appendTo(ul);
+  		}
+  	});
+
+  	$("#gender")
+  		.iconselectmenu()
+  		.iconselectmenu("menuWidget")
+  		.addClass("ui-menu-icons customicons");
+  $( "#date" ).datepicker();
+  $( "input[name='studies']" ).checkboxradio();
+  $( "input[name='subjects']" ).checkboxradio();
+  $( "button" ).button();
+  handle = $( '#custom-handle' );
+  slider = $('#slider').slider({
+	min: 0,
+	max: 5,
+	range: "min",
+	value: 0,
+	create: function() {
+        handle.text( $( this ).slider( "value" ) );
+      },
+	slide: null,
+  });
+
+  //Autocompletar
+  function split(val) {
+  	return val.split(/,\s*/)
+  }
+
+  function extractLast(term){
+  	return split(term).pop();
+  }
+
+  var availableTags;
+
+  $.getJSON('servidorTags.php', {}, function(data) {
+  	availableTags = data;
+  });
+
+  $('#tags').on('keydown',function (event) {
+  	if (event.keyCode === $.ui.keyCode.TAB && 
+  		$(this).autocomplete('instance').menu.active){
+  		event.preventDefault();
+  	}
+  }).autocomplete({
+  	minLength: 0,
+  	source: function (request, response) {
+  		response($.ui.autocomplete.filter(
+  			availableTags, extractLast(request.term)));
+  	},
+  	focus: function() {
+  		return false;
+  	},
+  	select: function(event, ui) {
+  		var terms = split(this.value);
+
+  		terms.pop();
+
+  		terms.push(ui.item.value);
+
+  		terms.push("");
+
+  		this.value = terms.join(', ');
+  		return false;
+  	}
+
+  });
+
+  $( "input[name='subjects']" ).on( "click", function() {
+	  if ($(this).prop( "checked" )) {
+		  let valor = slider.slider('option','value');
+	  	  slider.slider( "value", valor + 1 );
+		  handle.text( slider.slider( "value" ) );
+		} else{
+			let valor = slider.slider('option','value')
+			slider.slider( "value", valor - 1 );
+			handle.text( slider.slider( "value" ) );
+		}
+
+  });
+
+  	$('button:eq(0)').on('click', function(e) {
+		e.preventDefault();
+		$('form')[0].reset();
+		$('#custom-handle').text(0);
+		$('#custom-handle').parent().slider('value', 0);
+    });
+
+  	$('button:eq(1)').on('click', function(e) {
+		e.preventDefault();
+		$('#dialog-confirm').dialog('open');
+    });
+
+    $('button:eq(2)').on('click', function(e) {
+		e.preventDefault();
+		window.print();
+    });
+
+    $('#dialog-confirm').dialog({
+    	autoOpen: false,
+    	resizable: false,
+    	height: "auto",
+    	modal: true,
+    	buttons: {
+    		'OK': function(){
+    			$(this).dialog("close");
+    			$.get('servidor.php', {}, function(data) {
+    				$('#dialog-message').children('p').text(data);
+    				$('#dialog-message').dialog();
+    			});
+    		},
+    		'Cancelar': function(){
+    			$(this).dialog('close');
+    		}
+    	}
+    })
+});
+</script>
+
+
+</html>

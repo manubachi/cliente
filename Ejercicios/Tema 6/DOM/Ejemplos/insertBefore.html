@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+
+	<div id="div1">
+		<p id="p1">Párrafo 1</p>
+		<p id="p2">Párrafo 2</p>
+	</div>
+
+	<script>
+		var para = document.createElement("p");
+		var node = document.createTextNode("Párrafo nuevo");
+		para.appendChild(node);
+
+		
+		div1.insertBefore(para,p1);
+	</script>
+
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 1</title>
+    <script type="text/javascript">
+      var modulos = new Map();
+
+      modulos.set('DWECL','Desarrollo Web en Entorno Cliente');
+      modulos.set('DWESE','Desarrollo Web en Entorno Servidor');
+    //  modulos.set('DAW','Despliegue Aplicaciones Web');
+      modulos.set('DIW','Diseño Interfaces Web');
+
+      document.write(`<b>A. Muestra cuantos módulos hay almacenados </b>:
+        ${modulos.size} <br/>`);
+
+        document.write(`<hr/><b> B. Muestra contenido de la estructura : </b><br/>`);
+        for (let [key,value] of modulos) {
+          document.write(`${key} = ${value} <br/>`)
+        }
+
+        document.write(`<hr/><b> C. Devuelve las abreviaturas de todos los módulos
+          guardados : </b><br/>`);
+        for (let [key,value] of modulos) {
+          document.write(`${key} <br/>`)
+        }
+
+        document.write(`<hr/><b> D. Devuelve el nombre completo de todos los módulos
+          guardados :</b> <br/>`);
+        for (let [key,value] of modulos) {
+          document.write(`${value} <br/>`)
+        }
+
+        document.write(`<hr/> <b>E. Consulta si está el módulo "DAW"</b><br/>
+        ${modulos.has('DAW')} `);
+
+        document.write(`<hr/> <b>F. Borra el módulo "DAW" si lo encuentra </b><br/>`);
+
+        if (modulos.has('DAW')) {
+          modulos.delete('DAW');
+          document.write(`Se ha borrado el módulo "DAW" <br/>`);
+          for (let [key,value] of modulos) {
+            document.write(`${key} = ${value} <br/>`)
+          }
+        }else {
+          document.write(`No se encuentra el módulo "DAW" <br/>`);
+        }
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Actividad 2</title>
+  <style type="text/css">
+    div {
+      margin: .4em 0;
+    }
+
+    div label {
+      width: 12%;
+      float: left;
+    }
+  </style>
+  <script type="text/javascript">
+    /*function validar(){
+                          if (this.checkValidity() == false) {
+                              document.getElementById("error").innerHTML = this.validationMessage;
+                              this.value = '';
+                          }
+                      }*/
+
+    window.onload = function() {
+      dni.onchange = validaDNI;
+      nombre.onchange = validaNombre;
+      nac.onchange = validaFecha;
+      email.onchange = validaEmail;
+      web.onchange = validaWeb;
+      hijos.onchange = validaHijos;
+      confirma.onchange = compruebaPassword;
+    }
+
+    function validaNombre() {
+      if (document.getElementById("nombre").validity.patternMismatch) {
+        nombre.setCustomValidity('Se deben introducir 1 nombre y 2 apellidos');
+        error.innerHTML = nombre.validationMessage;
+        nombre.value = '';
+      }
+    }
+
+    function validaDNI() {
+      let valor = document.getElementById("dni").value;
+      var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X',
+        'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'
+      ];
+
+      if (document.getElementById("dni").validity.patternMismatch) {
+        dni.setCustomValidity('DNI no válido, debe tener 8 números y una letra');
+        error.innerHTML = dni.validationMessage;
+        dni.value = '';
+        return;
+      }
+
+      if (valor.charAt(8) != letras[(valor.substring(0, 8)) % 23]) {
+        document.getElementById("error").innerHTML = "Letra DNI no correcta";
+        dni.value = '';
+        return;
+      }
+      document.getElementById("error").innerHTML = "";
+      return true;
+    }
+
+    function validaEmail() {
+      let valor = document.getElementById("email").value;
+      if (document.getElementById("email").validity.patternMismatch) {
+        email.setCustomValidity('Email no válido');
+        error.innerHTML = email.validationMessage;
+        email.value = '';
+        return;
+      }
+      document.getElementById("error").innerHTML = "";
+      return true
+    }
+
+    function validaWeb() {
+      if (document.getElementById("web").validity.patternMismatch) {
+        web.setCustomValidity('Web no válida');
+        error.innerHTML = web.validationMessage;
+        web.value = '';
+        return;
+      }
+      document.getElementById("error").innerHTML = "";
+      return true
+    }
+
+    function validaHijos() {
+      if (document.getElementById("hijos").validity.rangeOverflow) {
+        hijos.setCustomValidity('El nº de hijos debe ser menor que 10');
+        error.innerHTML = hijos.validationMessage;
+        hijos.value = '';
+        return;
+      }
+
+      if (document.getElementById("hijos").validity.rangeUnderflow) {
+        hijos.setCustomValidity('El nº de hijos debe ser mayor que 0');
+        error.innerHTML = hijos.validationMessage;
+        hijos.value = '';
+        return;
+      }
+      document.getElementById("error").innerHTML = "";
+      return true
+    }
+
+    function compruebaPassword() {
+      let contra = password.value;
+      let repeat = confirma.value;
+      if (!(contra == repeat)) {
+        document.getElementById("error").innerHTML = "Las contraseñas no coinciden";
+        confirma.value = '';
+        return;
+      }
+      document.getElementById("error").innerHTML = "";
+      return true
+    }
+  </script>
+</head>
+
+<body>
+
+  <form>
+    <div>
+      <label for="dni">DNI</label>
+      <input type="text" name="dni" id="dni" maxlength="9" pattern='\d{8}[A-Z]'
+        placeholder="99999999X" required/>
+    </div>
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" maxlength='100' id="nombre"
+        pattern='[A-Za-zÁÉÍÓÚáéíóúñÑ]+(\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+)?\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+'
+        required/>
+    </div>
+    <div>
+      <label for="nac">F.Nac.:</label>
+      <input type="date" name="nac" id="nac"
+        placeholder="dd/mm/aaaa"  required/>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input name="email" type="text" id="email" maxlength='100'
+        pattern='[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})'
+        placeholder="ejemplo@correo.com" required/>
+    </div>
+    <div>
+      <label for="web">Pág. Web</label>
+      <input name="web" type="text" id="web"
+         pattern='(http|https)\:\/\/(www\.)?[a-z0-9]+\.[a-z]'
+         required/>
+    </div>
+    <div>
+      <label for="hijos">Nº. Hijos</label>
+      <input name="hijos" type="number" id="hijos" min="0" max="10" required/>
+    </div>
+    <div>
+      <label for="password">Contraseña:</label>
+      <input type="password" maxlength="10" minlength="8" name="password"
+        id="password" required>
+    </div>
+    <div>
+      <label for="confirma">Confirmar Contraseña:</label>
+      <input type="password" maxlength="10" minlength="8" name="confirma"
+        id="confirma" required>
+    </div>
+    <div>
+    </div>
+    <div>
+      <input type="reset" name="limpiar" id="limpiar" value="Limpiar" />
+      <input type="submit" name="enviar" id="enviar" on value="Enviar" />
+    </div>
+
+  </form>
+  <p id='error'></p>
+</body>
+
+</html>

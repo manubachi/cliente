@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 7</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		var palabras = [];
+		var palabras2 = [];
+		function rellenar()
+		{
+		    for (var i = 0; i < 5; i++) {
+		    	palabras[i] = prompt("Introduce una palabra");
+		    }
+		}
+
+	 var ventanaNueva;
+	 function abrir()
+	 {
+
+		 ventanaNueva= window.open('ejercicio7Nuevo.html','Nueva','height=1000, width=1000');
+	 }
+
+		function mostrar()
+		{
+			if (ventanaNueva) {
+				ventanaNueva.document.write("<b>LISTA DE PALABRAS:</b> <br/> "+ palabras.join('-'));
+			} else {
+				alert("La ventana nueva no se ha abierto");
+			}
+		}
+
+		function mostrarInverso()
+		{
+			if (ventanaNueva) {
+				palabras2 = palabras.slice();
+				ventanaNueva.document.write("<hr><b>LISTA DE PALABRAS INVERTIDA:</b> <br/> "+ palabras2.reverse().join('-'));
+
+			} else {
+				alert("La ventana nueva no se ha abierto");
+			}
+		}
+
+		function mostrarPrimero()
+		{
+			ventanaNueva.document.write("<hr><b>PRIMERA PALABRA INTRODUCIDA:</b> <br/> "+ palabras[0]);
+		}
+
+		function mostrarUltimo()
+		{
+			ventanaNueva.document.write("<hr><b>ULTIMA PALABRA INTRODUCIDA:</b> <br/> "+ palabras[(palabras.length-1)]);
+		}
+
+		function longitud()
+		{
+			ventanaNueva.document.write("<hr><b>NUMERO DE PALABRAS EN EL ARRAY:</b> <br/> "+ palabras.length);
+		}
+
+		function ordenarAsc()
+		{
+			ventanaNueva.document.write("<hr><b>ARAY ORDENADO ASCENDENTEMENTE:</b> <br/> "+ palabras.sort().join("-"));
+		}
+
+		function ordenarDes()
+		{
+
+			palabras2.sort();
+			ventanaNueva.document.write("<hr><b>ARAY ORDENADO DESCENDENTEMENTE:</b> <br/> "+ palabras2.reverse().join('-'));
+		}
+
+	</script>
+
+</head>
+<body>
+	<input type="button" value="Abre Página" id="pag "onclick="abrir()"/>
+</body>
+</html>

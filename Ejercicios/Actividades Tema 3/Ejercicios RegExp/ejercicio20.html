@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 20</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var expresion_regular_matricula = /^\d{4}[B-DF-HJ-NPR-TV-Z]{3}$/g;
+
+			var matricula = prompt("Introduce una matrícula moderna: ");
+
+			if(expresion_regular_matricula.test(matricula) == false)
+				alert("La matrícula introducida no está en un formato valido");
+			else
+				alert("La matrícula introducida es válida");
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Actividad 4 </title>
+    <script type="text/javascript">
+      var numeros = [];
+
+      // Genero en cada posición del array un número aleatorio
+      document.write("ARRAY ORIGINAL : <br/>");
+      for (var i = 0; i < 10; i++) {
+        numeros[i] = Math.ceil(Math.random()*1000);
+        document.write("Posición " +(i+1)+ " : " + numeros[i]+"<br/>" );
+      }
+
+      // Obtengo el número menor y mayor del array
+      var min = Math.min(...numeros);
+      var max = Math.max(...numeros);
+      document.write("<hr> Número menor : "+min+ "<br/> Numero mayor: "+ max);
+
+      // Obtengo la posicón donde se encuentran el menor y el mayor de los numeros
+      var posicionMin = numeros.indexOf(min);
+      var posicionMax = numeros.indexOf(max);
+      document.write("<hr> posicionMin : " + posicionMin +
+                    "<br/> posicionMax : " + posicionMax);
+
+
+      //Creo nuevo array
+      numeros2 = numeros.slice();
+
+      // Elimino del array numeros2 los numeros mayor y menor
+      numeros2.splice(posicionMin,1);
+      numeros2.splice(posicionMax,1);
+
+      // Muestro por pantalla el array original modificado.
+      document.write("<hr>ARRAY SIN MENOR NI MAYOR : <br/>");
+      for (var i = 0; i < numeros2.length; i++) {
+        document.write("Posición " +(i+1)+ " : " + numeros2[i]+"<br/>" );
+      }
+    </script>
+  </head>
+  <body>
+    
+  </body>
+</html>

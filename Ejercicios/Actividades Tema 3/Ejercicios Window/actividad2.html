@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Buscador de palabras</title>
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+
+		<p>Esto es un buscador de palabras hecho en JavaScript
+			<br/>Esto es un buscador de palabras hecho en JavaScript
+			<br/>Esto es un buscador de palabras hecho en JavaScript
+			<br/>Esto es un buscador de palabras hecho en JavaScript
+			<br/>Esto es un buscador de palabras hecho en JavaScript
+			<br/>Esto es un buscador de palabras hecho en JavaScript
+		</p>
+		<script type="text/javascript">
+			var n = 0,txt;
+			//Pregunto al usuario la cadena que desea buscar.
+			window.onload = function(){
+				txt = prompt("Introduze la cadena que quieras buscar: ");
+				buscar();
+			}
+			function buscar(){
+				//Parámetros metodo window.find(aString, aCaseSensitive, aBackwards, aWrapAround, aWholeWord, aSearchInFrames, aShowDialog)
+				//Comprueba si encuentra la cadena, diferenciando las mayúsculas y minúsculas y buscando solo palabras completas
+				if(window.find(txt,true,false,false,true))
+				{
+
+					n++;
+					alert("Encontrado!!")
+			        var x = confirm("¿Desea seguir buscando?");
+			        if(x == true){
+			           buscar()
+			        }else{
+			         	alert("Se ha encontrado la cadena \"" +txt+ "\" " + n +" veces");
+			        }
+        		}
+				else
+					alert("Se ha encontrado la cadena \"" +txt+ "\" " + n +" veces");
+			}
+
+
+		</script>
+
+	</body>
+</html>

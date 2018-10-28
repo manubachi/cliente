@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ejercicio 1 - XXX</title>
+	</head>
+	<body>
+		<form id="formulario">
+			<h1>QUIZ DOÑANA</h1>
+			<p>
+				<label>Pregunta 1: ¿Cuál es el número mayor?</label>
+				<input type='number' id='numero1' value=""  readonly/>
+				<input type='number' id='numero2' value="" readonly/>
+				<input type='number' id='numero3' value="" readonly/>
+				<input type='text' id='numMayor' value="" />
+			</p>
+			<p>
+				<label>Pregunta 2: ¿Cuántas horas han pasado?</label>
+				<input type='number' id="anyo" readonly/>
+				<input type='text' id="diferencia">
+			</p>
+			<p>
+				<label>TIEMPO</label>
+				<input type='number' id="tiempo" readonly>
+			</p>
+			<input type='button' value="Comprueba" onclick="validar()">
+
+		</form>
+		<script type="text/javascript">
+			var n1, n2, n3, anyoAle,ventanaNueva,intervalo,aciertos = 0,fecha;
+			var count = 10;
+			var fechaActual = new Date();
+			var anyoActual = fechaActual.getFullYear();
+
+			function numAleatorios() {
+				//Genera numeros aleatorios
+				n1 = Math.floor(Math.random()*100);
+				n2 = Math.floor(Math.random()*100);
+				n3 = Math.floor(Math.random()*100);
+
+
+				anyoAle =Math.floor(Math.random() * (anyoActual - 1970)) + 1970;
+
+
+
+				// Muestra en los input los números generados
+				document.getElementById('numero1').value = n1 ;
+				document.getElementById('numero2').value = n2;
+				document.getElementById('numero3').value = n3;
+
+				document.getElementById('anyo').value = anyoAle;
+			}
+
+			function creaFecha(){
+				fecha = new Date();
+				fecha.setFullYear(anyoAle);
+
+			}
+
+			function cuentaAtras() {
+
+    			intervalo = setInterval(function(){
+                       count--;
+                       document.getElementById('tiempo').value = count;
+                       if(count == 0){
+                         clearInterval(intervalo);
+                         abreVentana();
+                        
+                       }
+                	}, 1000);
+    		}
+			function abreVentana(){
+				ventanaNueva = window.open("nueva.html","Nueva","height=100, width=300");
+				ventanaNueva.moveTo(screen.width-300,screen.height-100);
+				if (tiempo.value == 0){
+					 ventanaNueva.document.write("<h3>LA BOMBA HA EXPLOTADO</h3>");
+				}
+
+				if (tiempo.value != 0) {
+					let resta  = 10 - tiempo.value;
+					ventanaNueva.document.write("Número de aciertos: " +aciertos+
+				"<br> Tiempo empleado: " + (resta))
+				}
+			}
+
+
+			function validar() {
+				let max = Math.max(n1,n2,n3);
+				let diff = (fecha.getTime() - fechaActual.getTime())/(1000*60*60);
+				if (document.getElementById('tiempo').value != 0) {
+					clearInterval(intervalo);
+					if (numMayor.value == max ) {
+						aciertos++;
+					}
+					if (diferencia.value == diff) {
+						aciertos++;
+					}
+				}
+				abreVentana();
+			}
+
+			numAleatorios();
+			creaFecha();
+			cuentaAtras();
+
+		</script>
+	</body>
+</html>

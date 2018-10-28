@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DOM Node Object Type</title>
+    </head>
+<body>
+<a href="#">Saludos</a> <!-- Elemento que vamos a estudiar -->
+<script>
+    // Tomamos la referencia del objeto del nodo
+    var nodeAnchor = document.querySelector('a');
+    // Mostramos algunos datos
+    alert('Tipo: ' + nodeAnchor.nodeType);
+    alert('Nombre: ' + nodeAnchor.nodeName);
+    alert('Valor: ' + nodeAnchor.nodeValue);
+    alert('Atributos: ' + nodeAnchor.attributes);
+    alert('Documento propietario: ' + nodeAnchor.ownerDocument);
+    alert('Nodo padre: ' + nodeAnchor.parentNode);
+</script>
+</body>
+</html>

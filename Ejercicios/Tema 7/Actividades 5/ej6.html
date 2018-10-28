@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 6</title>
+	<style type="text/css">
+		#div {
+			height: 250px;
+			width: 250px;
+			background-color: red;
+		}
+	</style>
+	<script
+  		src="https://code.jquery.com/jquery-3.2.1.js"
+  		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  		crossorigin="anonymous">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setInterval(function(){$('#div').toggle("fast")},2000);
+		});
+
+	</script>
+</head>
+<body>
+	<div id='div'> Esto es un div</div>
+</body>
+</html>

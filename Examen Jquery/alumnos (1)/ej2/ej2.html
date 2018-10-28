@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<style type="text/css">
+
+		table {text-align: center; border-width: 1px; border-style:dotted;}
+
+		.fila {background-color: grey;}
+
+	</style>
+
+</head>
+<body>
+	<h1> Editorial Doñana</h1>
+	<div>
+		<h2>¿Qué información desea consultar?</h2>
+		<input type='radio' value='autores' name='tipo'>Autores</input>
+		<input type='radio' value='libros' name='tipo'>Libros</input>
+	</div>
+	<br>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input').on('click',function(){
+			let valor = $(this).val();
+			$('body').children('table').remove();
+			$.post('servidor.php',{op: valor}, function(data){
+				if(valor == 'libros'){
+					let tabla = '<table><thead><th>Titulo</th><th>Portada</th></thead><thbody>';
+					$.each(data, function(k,v){
+						let ruta = v.Portada;
+						tabla+= '<tr><td>'+v.Título+'</td>';
+						tabla+= '<td><img src="images/'+ruta+'.jpg"/></td></tr>';
+					})
+					tabla += '</thbody></table>'
+					$('body').append(tabla)
+					$('tr').on('mousemove', function(){
+						$(this).addClass('fila');
+					});
+
+					$('tr').on('mouseout', function(){
+						$(this).removeClass('fila');
+					});
+					$('table').css({'display': 'none'});
+					$('table').show(2000, function() {
+						$('table').css({'border-width':'5px'});
+					});
+
+				}else{
+					let tabla2 = '<table><thead><th>Autor</th><th>Num.Publicaciones</th></thead><thbody>';
+					$.each(data, function(k,v){
+						tabla2+= '<tr><td>'+v.Autor+'</td>';
+						tabla2+= '<td>'+(v.publicaciones)+'</td></tr>';
+					})
+					tabla2 += '</thbody></table>'
+					$('body').append(tabla2);
+					$('tr').on('mousemove', function(){
+						$(this).addClass('fila');
+					});
+
+					$('tr').on('mouseout', function(){
+						$(this).removeClass('fila');
+					})
+					$('table').css({'display': 'none'});
+					$('table').show(2000,function() {
+						$('table').css({'border-width':'5px'});
+					});
+
+				}
+			})
+		});
+
+	});
+</script>
+</html>

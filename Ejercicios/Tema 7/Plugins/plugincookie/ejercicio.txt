@@ -1,0 +1,7 @@
+Input de tipo text 
+boton de guardar cookie
+boton de ver cookie
+boton de borrar cookie
+boton ver todas cookies
+boton borrar todas cookies
+

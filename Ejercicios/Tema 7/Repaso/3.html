@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 3</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#pregunta1').on('click',muestra);
+            $('#pregunta2').on('click',muestra);
+            $('#pregunta3').on('click',muestra);
+        })
+
+        function muestra() {
+            $('h3').next().css({'display':'none'});
+            $(this).next().css({'display':'block'});
+            $(this).next().css({'background':'lightgrey'});
+            $(this).css({'color':'red'});
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Listado de FAQs</h2>
+    <div >
+        <h3 id="pregunta1" style="color:blue">Pregunta 1</h3>
+        <p style="display:none">Respuesta 1</p>
+    </div>
+
+
+
+    <div >
+        <h3 id="pregunta2" style="color:blue">Pregunta 2</h3>
+        <p style="display:none">Respuesta 2</p>
+    </div>
+
+    <div >
+        <h3 id="pregunta3" style="color:blue" >Pregunta 3</h3>
+        <p  style="display:none">Respuesta 3</p>
+    </div>
+</body>
+
+</html>

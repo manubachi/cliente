@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Crear y leer archivo</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<label for="nombre">Nombre del archivo: </label>
+	<input id="nombre" type="text" name="" value="" /><br>
+	<label for="contenido">Contenido: </label>
+	<textarea id="contenido" name="name" rows="4" cols="40"></textarea><br>
+	<input type="button" id="grabar" value="Grabar">
+	<input type="button" id="leer" value="Leer">
+	<script>
+		window.onload = function() {
+			window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+
+			window.webkitStorageInfo.requestQuota(window.TEMPORARY, 1024*1024, function(grantedBytes){
+				webkitRequestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+					console.log(`El sistema de archivos ${fs.name} ha sido abierto`);
+				}, function(e) {
+					console.log('Error durante la operación. Codigo de error: ' + e.code);
+				});
+			}, function(e) {
+				console.log('Error' + e.code);
+			})
+
+			$('#grabar').on('click', function() {
+				let archivo = $('#nombre').val();
+				crearArchivo(archivo);
+			})
+
+			$('#leer').on('click', function() {
+				let archivo = $('#nombre').val();
+				leerArchivo(archivo);
+			})
+		}
+
+		function crearArchivo(nombre) {
+			window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+				fs.root.getFile(nombre, {create: true}, function(fileEntry) {
+					fileEntry.createWriter(function (fileWriter) {
+						fileWriter.onwriteend = function(e) {
+							console.log(`Se ha escrito en el fichero`);
+						}
+
+						fileWriter.onerror = function(e) {
+							console.log(`Error al escribir el contenido ${e.toString()}`);
+						}
+						let contenido = $('#contenido').val();
+						var bb = new Blob([contenido], {type: 'text/plain'});
+						fileWriter.write(bb);
+					});
+				}, function() {
+					console.log('Error');
+				})
+			});
+		}
+
+		function leerArchivo(nombre) {
+			window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+				fs.root.getFile(nombre, {}, function(fileEntry){
+					fileEntry.file(function (file) {
+						var reader = new FileReader();
+
+						reader.onloadend = function(e) {
+							$('#contenido').val(this.result);
+						}
+						reader.readAsText(file);
+					})
+				}, function(){
+					console.log('El archivo no existe');
+				})
+			})
+		}
+		
+
+		
+
+	</script>
+</body>
+
+</html>

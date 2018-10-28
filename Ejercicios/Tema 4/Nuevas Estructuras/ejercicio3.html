@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 3</title>
+		<script type="text/javascript">
+    let alum = new Map();
+
+    let asignaturas = new Set();
+
+    asignaturas.add("DWECL");
+    asignaturas.add("DAW");
+    asignaturas.add("DWESE");
+    asignaturas.add("DIW");
+
+    alum.set("Manu", asignaturas);
+
+    function aprobado(alumno,asig)
+    {
+      for (let [key,value] of alum) {
+        if(alumno == key){
+          if (value.has(asig)) {
+            document.write(`El alumno ${alumno} ha aprobado la asignatura ${asig} <br>`)
+          }else {
+            document.write(`El alumno ${alumno} no ha aprobado la asignatura ${asig} <br>`)
+          }
+        }
+      }
+    }
+
+    aprobado("Manu","EIE");
+    aprobado("Manu", "DWECL");
+
+
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

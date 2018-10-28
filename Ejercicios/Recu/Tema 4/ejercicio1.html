@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 1</title>
+    <script type="text/javascript">
+    // Relleno el array con los números aleatorios
+      var numeros = new Array(10);
+      for (var i = 0; i < numeros.length; i++) {
+        var aleatorio = Math.ceil(Math.random()*10);
+        numeros.fill(aleatorio,i);
+        // numeros[i] = aleatorio;
+      }
+
+      // Guardo en otro array los menores a 8
+      var menores8 = numeros.filter(menor => menor < 8);
+
+
+      // Intercambio los valores impares por la cadena impar
+      var intercambiado = menores8.map(function (item) {
+          if ((item %2) != 0) {
+            return "impar";
+          }else {
+            return item;
+          }
+      } );
+
+      // Muestro todos los array
+      document.write("Array original : <br/>"+ numeros.join(" - ") +
+    "<br/> Array menores de 8 : <br/>"+ menores8.join(" - ") +
+    "<br/> Array intercambiado : <br/>" + intercambiado.join(" - "));
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

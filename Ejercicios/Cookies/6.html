@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Actividad 6</title>
+  <script src="cookies.js">
+  </script>
+  <script type="text/javascript">
+    window.onload = function() {
+        let meters = document.getElementsByTagName('meter')
+        for (let met of meters) {
+          if (!(getCookie(met.id))) {
+            met.value = 0
+          } else {
+            met.value = getCookie(met.id);
+          }
+        }
+    }
+
+    function sumaVoto() {
+      let so = document.getElementsByName('so');
+      let meters = document.getElementsByTagName('meter');
+      for (let s of so){
+        if (s.checked) {
+          if (!(getCookie(s.id))) {
+            setCookie(s.id,0);
+          }
+          let valor = getCookie(s.id);
+          setCookie(s.id,++valor);
+        }
+      }
+      for (let met of meters) {
+          met.value = getCookie(met.id);
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <form>
+    <h2>¿Que Sistema operativo te gusta más</h2>
+    <input type="radio" name="so" value="ios" id="ios">iOS <br/>
+    <input type="radio" name="so" value="android" id="android">Android <br/>
+    <input type="radio" name="so" value="windows" id="windows">Windows Phone <br/>
+    <input type="radio" name="so" value="otros" id="otros">Otros <br/>
+    <input type="button" name="votar" id="votar" value="Votar" onclick="sumaVoto()">
+    <br>
+  </form>
+
+  <meter value="0" min="0" max="100" id="ios"></meter>iOS <br/>
+  <meter value="0" min="0" max="100" id="android"></meter>Android <br/>
+  <meter value="0" min="0" max="100" id="windows"></meter>Windows Phone <br/>
+  <meter value="0" min="0" max="100" id="otros"></meter>Otros <br/>
+
+</body>
+
+</html>

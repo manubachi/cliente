@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 1</title>
+	<style type="text/css">
+		.div1 {
+			height: 800px; 
+			width: 70px;
+			background-color: red;
+		}
+
+		.div2 {
+			height: 250px; 
+			width: 250px;
+			background-color: red;
+		}
+	</style>
+	<script
+  		src="https://code.jquery.com/jquery-3.2.1.js"
+  		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  		crossorigin="anonymous">
+	</script>
+	<script type="text/javascript">
+		var ancho;
+		var alto ;
+		$(document).ready(function() {
+			$('.div1').dblclick(function () {
+				if ($(this).hasClass('div1')) {
+					$(this).removeClass('div1')
+					$(this).addClass('div2')
+					ancho = $(this).width();
+					alto = $(this).height();
+				} else{
+					$(this).removeClass('div2')
+					$(this).addClass('div1')
+					ancho = $(this).width();
+					alto = $(this).height();
+				}
+				$('#res').html(ancho + " px de ancho <br>" + alto + " px de alto");
+			})
+		})
+
+		
+	</script>
+</head>
+<body>
+	<div class="div1"> Esto es un div</div>
+	<div id="res"></div>
+</body>
+</html>

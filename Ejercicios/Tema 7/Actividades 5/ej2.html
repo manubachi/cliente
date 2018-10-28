@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 2</title>
+	<style type="text/css">
+		#div1{
+			height: 500px; 
+			width: 500px;
+			background-color: red;
+			position: relative;
+  			top:  0px; 
+  			left: 100px;
+		}
+	</style>
+	<script
+  		src="https://code.jquery.com/jquery-3.2.1.js"
+  		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  		crossorigin="anonymous">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var boton = $('<input>');
+			boton.attr('type','button');
+			boton.attr('id','btn');
+			boton.attr('value','Click aqui')
+			$('#res').append(boton);
+			$('#btn').on('click', function() {
+				var posicion = $('#div1').position();
+				var nuevaPos = posicion.left-100;
+				var ancho = $('#div1').width() - 150;
+				var alto = $('#div1').height() - 150;
+				$('#div1').css({'left':nuevaPos,
+				                 'height': alto,
+				                 'width': ancho});
+
+			})
+		})
+
+		
+	</script>
+</head>
+<body>
+	<div class="div1" id="div1"> Esto es un div</div>
+	<div id="res"></div>
+</body>
+</html>

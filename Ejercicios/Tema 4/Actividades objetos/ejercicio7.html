@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Actividad 7</title>
+</head>
+	<script type="text/javascript">
+
+		// Empleado
+		class Empleado{
+			constructor(nombre, departamento){
+				this.nombre = nombre || "";
+				this.departamento = departamento || "General";
+			}
+
+			obtDetalles(){
+				let resultado = "";
+				for (let i in this) {
+					if (typeof this[i] != "function") {
+						resultado +=  i + " = " + this[i] + "<br>"
+					}
+				}
+				return resultado;
+			}
+		}
+
+ 		// Director
+		class Director extends Empleado {
+			constructor(nombre, departamento, informes){
+				super(nombre,departamento);
+  				this.informes = informes || [];
+			}
+		}
+
+
+		 //Trabajador
+		class Trabajador extends Empleado  {
+			constructor(nombre, departamento, proyectos){
+				super(nombre,departamento);
+		  		this.proyectos = proyectos || [] ;
+			}
+		}
+
+
+		// Ingeniero
+		class Ingeniero extends Trabajador {
+			constructor(nombre,proyectos, maquina ){
+				super(nombre,"Ingeniería", proyectos);
+		  		this.maquina = maquina || "";
+			}
+		}
+
+		// Pruebas
+		var empleado = new Empleado("Pepe","Informatica");
+		var empleado2 = new Empleado("Manu");
+		document.write(empleado.obtDetalles()+ "<hr>");
+		document.write(empleado2.obtDetalles()+ "<hr>");
+
+		var director = new Director("Luis","",["Informe1","Informe2"]);
+		var director2 = new Director("Alberto","Informatica",["Informe1","Informe2"]);
+		document.write(director.obtDetalles()+ "<hr>");
+		document.write(director2.obtDetalles()+ "<hr>");
+
+		var trabajador = new Trabajador("Federico","Informatica",["Proyecto1,Proyecto2"]);
+		var trabajador2 = new Trabajador("Luisa",'',["Proyecto1,Proyecto2"]);
+		document.write(trabajador.obtDetalles()+ "<hr>");
+		document.write(trabajador2.obtDetalles()+ "<hr>");
+
+		var ingeniero = new Ingeniero("Rodolfo",["Proyecto1,Proyecto2"],"Empaquetadora");
+		var ingeniero2 = new Ingeniero("Rocio",["Proyecto1,Proyecto2"],"");
+		document.write(ingeniero.obtDetalles()+ "<hr>");
+		document.write(ingeniero2.obtDetalles()+ "<hr>");
+	</script>
+<body>
+
+</body>
+</html>

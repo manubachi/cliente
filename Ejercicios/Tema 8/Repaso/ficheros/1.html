@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<title>Ejercicio 1</title>
+	<style>
+.suggest-element{
+margin-left:5px;
+margin-top:5px;
+width:350px;
+cursor:pointer;
+}
+#suggestions {
+width:350px;
+height:150px;
+overflow: auto;
+}
+</style>
+</head>
+<body>
+<form>
+   <input type="text" size="50" id="service" name="service" />
+   <div id="suggestions"></div>
+</form>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {    
+    //Al escribr dentro del input con id="service"
+    $('#service').on('keypress',function(){
+        //Obtenemos el value del input
+        var service = $(this).val();        
+        //Le pasamos el valor del input al ajax
+        $.ajax({
+            type: "GET",
+            url: "autocompletar.php?q=" + service + "",
+            data: service,
+            success: function(data) {
+            	$('#suggestions').html('<p>'+data+'</p>');
+            }
+        });
+    });              
+});    
+</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 2</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			var fechaActual = new Date().getTime();
+
+
+			var fechaNac = new Date('1996-05-06').getTime();
+
+			var diferencia = fechaActual - fechaNac;
+
+			var edad = diferencia/(1000*60*60*24*31*12); // * milisegundos * segundos * minutos * horas * dias * meses = años
+			alert(`Mi edad es ${edad.toFixed()} años`);
+
+
+		</script>
+		   	
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 1</title>
+    </head>
+    <body>
+        <fieldset>
+            <legend>Convertidor de base 10 a base x</legend>
+            Número en base 10: <input type="number" id="num"><br>
+            Selecciona la base: <select id="base">
+                <option value="null" selected>Seleccione una opcion</option>
+                <option value="2">2</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+            </select> <br>
+            <input type="button" id="convertir1" value="Convertir">
+            <input type="text" id="resultado" >
+      </fieldset>
+      <br>
+      <br>
+
+      <fieldset>
+          <legend>Convertidor de base x a base 10</legend>
+          Número: <input type="text" id="num2"><br>
+          Selecciona la base en la que se encuentra: <select id="base2">
+              <option value="null" selected>Seleccione una opcion</option>
+              <option value="2">2</option>
+              <option value="8">8</option>
+              <option value="16">16</option>
+          </select> <br>
+          <input type="button" id="convertir2" value="Convertir">
+          <input type="text" id="resultado2" >
+    </fieldset>
+
+    </body>
+    <script type="text/javascript">
+        convertir1.addEventListener('click',desdeBase10);
+        convertir2.addEventListener('click', hastaBase10);
+
+        function desdeBase10() {
+            if (num.value == "") {
+                alert('Selecciona un valor para el número');
+                return;
+            }else {
+                var numero = parseInt(num.value);
+            }
+
+            if (base.value == 'null') {
+                alert('Selecciona una base de las opciones');
+                return;
+            }else {
+                var baseElegida = parseInt(base.value);
+            }
+            var convertido = numero.toString(baseElegida);
+            resultado.value = convertido;
+        }
+
+        function hastaBase10() {
+            if (num2.value == "") {
+                alert('Selecciona un valor para el número');
+                return;
+            }else {
+                var numero2 = num2.value;
+            }
+
+            if (base2.value == 'null') {
+                alert('Selecciona una base de las opciones');
+                return;
+            }else {
+                var baseElegida2 = parseInt(base2.value);
+            }
+            var convertido2 =parseInt(numero2,baseElegida2);
+            resultado2.value = convertido2;
+        }
+    </script>
+</html>

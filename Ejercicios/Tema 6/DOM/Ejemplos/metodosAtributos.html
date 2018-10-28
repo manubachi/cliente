@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.roja {
+		    color: red;
+		}
+	</style>
+</head>
+<body>
+	<a id="link" href="http://www.google.es">Ir a Google </a>
+
+	<script>
+		enlace = document.getElementById("link");
+		//consultar
+		alert("Contenido de href " + enlace.attributes.getNamedItem('href').value);
+		alert("Contenido de href 2 " + enlace.getAttribute('href'));
+
+		alert("Total de atributos " + enlace.attributes.length);
+		alert("Contenido del item 0 " + enlace.attributes.item(0).value);
+		alert("Contenido del item 1 " + enlace.attributes.item(1).value);
+
+		//modificar
+		enlace.setAttribute('href','http://www.gmail.com');
+		enlace.attributes.getNamedItem('href').value = 'http://www.hotmail.com';
+
+
+		//añadir
+		enlace.setAttribute('name','enlaceName');
+
+		var at = document.createAttribute("class");
+    	at.nodeValue = "roja";  //at.value='roja';
+    	//enlace.attributes.setNamedItem(at); 
+    	enlace.setAttributeNode(at);
+		
+		alert("Total de atributos " + enlace.attributes.length);
+
+		//eliminar
+		//enlace.removeAttribute('id');
+		enlace.attributes.removeNamedItem('id');
+		alert(enlace.hasAttribute("id"));
+		
+
+	</script>
+	
+</body>
+</html>

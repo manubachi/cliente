@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<!-- Realizar un script que cuando pulse el usuario con el botón del ratón en cualquier sitio de la
+pantalla, identifique si ha pulsado con el botón derecho, izquierdo o la rueda central. 
+ -->
+	<head>
+		<meta charset="utf-8">
+		<title>Actividad 1</title>
+		<script type="text/javascript">
+			function info(elEvento) {
+				var evento = elEvento || window.event;
+				switch(evento.button){
+					case 0:
+						alert("Haz hecho click con el Boton izquierdo");
+						break;
+					case 1:
+						alert("Haz hecho click con el Boton central");
+						break;
+					case 2:
+						alert("Haz hecho click con el Boton derecho");
+						break;
+				}
+				
+			}
+
+			window.onload = function() {
+				document.onmousedown = info;
+			}
+		</script>
+	</head>
+	<body >
+	</body>
+</html>

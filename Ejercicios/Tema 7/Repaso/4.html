@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<!-- Realice una galería fotográfica. Al seleccionar una de las imágenes, el resto deben
+pasar a tener una opacidad de 0.4 y la seleccionada tendrá un especial énfasis con el
+efecto que prefieras.  -->
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 4</title>
+        <style media="screen">
+            .opacidad{
+                opacity: 0.4;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('img').on('click',function() {
+                    $(this).siblings().addClass('opacidad');
+                    if ($(this).hasClass('opacidad')) {
+                        $(this).removeClass('opacidad');
+                    }
+                    $(this).attr('height',500);
+                    $(this).attr('width',500);
+                    $(this).siblings().attr('height',300);
+                    $(this).siblings().attr('width',300);
+                })
+            });
+        </script>
+    </head>
+    <body>
+
+        <img src="https://programarivm.com/wp-content/uploads/2012/03/jquery.png" height="300px" width="300px">
+        <img src="http://uniformjs.com/pics/js-jquery.png" height="300px" width="300px">
+        <img src="https://www.javascript.com/images/meta/facebook.png" height="300px" width="300px">
+        <img src="https://www.codejobs.biz/public/images/blog/original/93f8bb0eb2c659b.jpg" height="300px" width="300px" >
+
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actividad Service Workers</title>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <button id="btn-1">Foto1</button>
+        <button id="btn-2">Foto2</button>
+
+        <div id="fotos"></div>
+
+        <script src="jquery-3.3.1.min.js"></script>
+
+        <script type="text/javascript">
+            // REGISTRAR SERVICE WORKER
+
+
+            ////////////////////////////
+
+            $('#btn-1').on('click', function(){
+                $('#fotos').append('<img src="imagenes/gato1.jpg">');
+            });
+
+            $('#btn-2').on('click', function(){
+                $('#fotos').append('<img src="imagenes/gato2.jpg">');
+            });
+        </script>        
+
+    </body>
+
+</html>

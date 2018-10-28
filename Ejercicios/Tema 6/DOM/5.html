@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ejercicio 5</title>
+	<script type="text/javascript">
+		window.onload = function() {
+			ad.onclick = avanzar;
+			at.onclick = volver;
+		}
+		var cont = 0;
+		function avanzar() {
+			limpia();
+			let imagenes = document.getElementsByName('i');
+			for (var i = 0; i < imagenes.length; i++) {
+				if(i == cont){
+					let cln = imagenes[i].cloneNode(true);
+                   	let dis = document.createAttribute('style');
+          			dis.value = 'display: block';
+          			cln.setAttributeNode(dis);
+          			ver.appendChild(cln);
+				}
+			}
+			if (cont == 2) {
+				cont = 0;
+			}else{
+				cont++;
+			}	
+		}
+
+		function volver() {
+			limpia();
+			let imagenes = document.getElementsByName('i');
+			for (var i = 0; i < imagenes.length; i++) {
+				if(i == cont){
+					let cln = imagenes[i].cloneNode(true);
+                   	let dis = document.createAttribute('style');
+          			dis.value = 'display: block';
+          			cln.setAttributeNode(dis);
+          			ver.appendChild(cln);
+				}
+			}
+			if (cont == 0) {
+				cont = 2 ;
+			}else{
+				cont--;
+			}	
+		}
+
+		function limpia(){
+          ver.removeChild(ver.childNodes[0]);
+        }
+	</script>
+</head>
+<body>
+	<div>
+		<img src="http://www.cadizturismo.com/media/fotos/image_69786.jpeg" width="350" height="350" name="i" style="display: none;">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Faro%2C_Chipiona%2C_Espa%C3%B1a%2C_2015-12-08%2C_DD_16-18_HDR.JPG/1200px-Faro%2C_Chipiona%2C_Espa%C3%B1a%2C_2015-12-08%2C_DD_16-18_HDR.JPG" width="350" height="350" name="i" style="display: none;">
+		<img src="http://www.cadizturismo.com/media/fotos/image_62791.jpeg" width="350" height="350" name="i" style="display: none;">
+	</div>
+	
+	<div id="ver">
+		
+	</div>
+	<input type="button" name="atras" value="Atras" id="at">
+	<input type="button" name="adelante" value="Adelante" id="ad">
+</body>
+</html>

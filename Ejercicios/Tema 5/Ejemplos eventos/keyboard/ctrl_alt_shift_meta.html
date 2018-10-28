@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		
+		function key (event){
+			console.log( "Se ha pulsado la tecla Control: " + event.ctrlKey);
+			console.log( "Se ha pulsado la tecla Alt: " + event.altKey);
+			console.log( "Se ha pulsado la tecla Shift: " + event.shiftKey);
+			console.log( "Se ha pulsado la tecla de Windows/Command Mac: " + event.metaKey);
+		}
+
+		window.addEventListener("keydown", key , true);		
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

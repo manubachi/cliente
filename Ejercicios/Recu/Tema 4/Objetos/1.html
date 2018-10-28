@@ -1,0 +1,54 @@
+<script type="text/javascript">
+   // Vehiculo con propiedades y métodos
+     function Vehiculo(marca,modelo,color,anyo)
+     {
+       this.marca = marca;
+       this.modelo = modelo;
+       this.color = color;
+       this.anyo = anyo;
+     }
+
+     Vehiculo.prototype.mostrarDatos = function () {
+       let resultado = "";
+       for (let i in this) {
+         if (typeof this[i] != "function") {
+           resultado +=  i + " = " + this[i] + "<br>"
+         }
+       }
+       document.write("<hr>" + resultado) ;
+     };
+
+     Vehiculo.prototype.acelerar = function (velocidad) {
+       document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo +
+       " de color " + this.color + " ha acelarado a " + velocidad + " km/h");
+     };
+
+     Vehiculo.prototype.arrancar = function () {
+       document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo + " de color "
+       + this.color + " ha arrancado.");
+     };
+
+     Vehiculo.prototype.frenar = function () {
+       document.write("<br/>El coche de marca " + this.marca + " modelo " + this.modelo + " de color "
+       + this.color + " ha parado.");
+     };
+
+     Vehiculo.prototype.cilindrada = 120;
+
+
+     var coche = new Vehiculo("Kia","Sportage","Gris",2013);
+
+     var coche2 = new Vehiculo("Kia","Ceed","Azul",2016);
+
+     coche.mostrarDatos();
+     coche.arrancar();
+     coche.acelerar(120);
+     coche.frenar();
+
+     coche2.cilindrada = 200
+     coche2.mostrarDatos();
+     coche2.arrancar();
+     coche2.acelerar(100);
+     coche2.frenar();
+
+   </script>

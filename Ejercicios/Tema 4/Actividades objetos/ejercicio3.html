@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad 3</title>
+    <script type="text/javascript">
+      var array = ["hola","como","estas","como","estas"];
+
+      Array.prototype.elimina = function () {
+        let valor = prompt("Array original: " + array.join("-") +  "\nIntroduce el valor a eliminar: ");
+
+        if(this.some(elem => elem == valor)){
+          for (var i = 0; i < this.length; i++) {
+            if (this[i] == valor) {
+                this.splice(i,1)
+                i--;
+            }
+          }
+        }else {
+          alert("Valor no encontrado");
+        }
+      };
+
+      document.write(array.join("-"));
+      array.elimina();
+      document.write("<br>" + array.join("-"));
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Actividad 5</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			var mensaje = "UTC -12 : Línea internacional de fecha del oeste\n" +
+						  "UTC -11 : Isla Midway, Samoa\n" +
+						  "UTC -10 : Hawai\n" +
+						  "UTC -9 : Alaska\n" +
+						  "UTC -8 : Hora del pacífico (USA y Canadá)\n" +
+						  "UTC -7 : Hora de las montañas rocosas (USA y Canadá)\n" +
+						  "UTC -6 : América central\n" +
+						  "UTC -5 : Hora central (USA y Canadá)\n" +
+						  "UTC -4 : Hora del Atlántico (Canadá)\n" +
+						  "UTC -3 : Buenos Aires, Asunción, Brasilia, Montevideo\n" +
+						  "UTC -2 : Atlántico central\n" +
+						  "UTC -1 : Azores\n" +
+						  "UTC 0 : Hora del meridiano de Greenwich, Londres, Dublín\n" +
+						  "UTC +1 : París, Madrid, Barcelona, Roma\n" +
+						  "UTC +2 : El Cairo\n" +
+						  "UTC +3 : Nairobi\n" +
+						  "UTC +4 : Bakú\n" +
+						  "UTC +5 : Ekaterimburgo\n" +
+						  "UTC +6 : Astana\n" +
+						  "UTC +7 : Bangkok\n" +
+						  "UTC +8 : Ulán Bator\n" +
+						  "UTC +9 : Tokio\n" +
+						  "UTC +10 : Sidney\n" +
+						  "UTC +11 : Islas Salomón\n" +
+						  "UTC +12 : Wellington";
+
+			console.log(mensaje);
+			var opcion = parseInt(prompt(`Selecciona una opción: `));
+
+			var fecha = new Date();
+
+			var utc = fecha.getTime() /*+(fecha.getTimezoneOffset() * 60000); */// Suma los milisegundos desde 1970 hasta ahora + la diferencia en milisegundos entre
+																			//la hora del sistema y la hora central.(*60000 para convertir los minutos en milisegundos)
+
+			var nuevaFecha = new Date(utc + (3600000 * opcion)); // Se crea la nueva fecha sumandole a la fecha base los milisegundos que hemos calculado
+																//anteriormente + la opción introducida por el usuario (*3600000 para convertir las horas a milisegundos)
+
+			alert(`${nuevaFecha.toLocaleString()}`);
+
+		</script>
+
+	</body>
+</html>

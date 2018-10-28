@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="detalles">
+
+        </div>
+        <iframe src="iframe.html" width="200" height="200"></iframe>
+
+    </body>
+
+    <script type="text/javascript">
+    window.onload = function() {
+        window.frames[0].document.getElementById('btn').addEventListener('click',calcular);
+    }
+        function Producto_informatico(nombre,precio,cantidad){
+            this.nombre = nombre;
+            this.precio = precio;
+            this.cantidad = cantidad;
+        }
+
+        Producto_informatico.prototype.mostrarDatos = function() {
+            var resultado ='';
+            for (let i in this) {
+                if (typeof this[i] != 'function') {
+                    resultado += i + ' = ' + this[i] + " <br>";
+                }
+            }
+            document.write( "<br>"+ resultado);
+        }
+
+        function Microprocesador(nombre,precio,cantidad,socket){
+            Producto_informatico.call(this,nombre,precio,cantidad);
+            this.socket = socket;
+        }
+        Microprocesador.prototype = new Producto_informatico();
+        Microprocesador.prototype.constructor = Microprocesador;
+
+        function Memoria(nombre,precio,cantidad,frecuencia,capacidad){
+            Producto_informatico.call(this,nombre,precio,cantidad);
+            this.frecuencia = frecuencia;
+            this.capacidad = capacidad
+            this.transferencia = 'La tasa de transferencia del módulo de memoria '+ nombre+ ' es ' + frecuencia * 4;
+        }
+
+        Memoria.prototype = new Producto_informatico();
+        Memoria.prototype.constructor = Memoria;
+
+
+        var prod = new Producto_informatico('impresora',50, 1);
+        var mic = new Microprocesador('i4',75,2,'lga77');
+        var mem = new Memoria('kingston', 25,1, 521, 32 );
+
+        var productos = [prod,mic,mem]
+
+        for (var i = 0; i < productos.length; i++) {
+            document.write('<br>Producto ' + i );
+            productos[i].mostrarDatos();
+        }
+
+
+        function calcular() {
+            let stock = 0
+            for (var i = 0; i < productos.length; i++) {
+                stock += productos[i].cantidad
+            }
+
+            window.frames[0].document.getElementById('resul').value = stock ;
+        }
+
+
+    </script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hora</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+			function reloj()
+			{
+				var fecha= new Date();
+	 			var hora=fecha.getHours();
+	            var minutos=fecha.getMinutes();
+	 			var segundos=fecha.getSeconds();
+
+	 			if (minutos<=9)
+	 				minutos="0"+minutos;
+	 			if (segundos<=9)
+	 				segundos="0"+segundos;
+
+	 			var mostrar= hora + ":" +minutos+ ":"+segundos;
+	 			document.body.innerHTML="";
+	 			document.title = mostrar;
+	 			setTimeout("reloj()",1000);
+			}
+
+			reloj();
+
+
+		</script>
+	</body>
+</html>

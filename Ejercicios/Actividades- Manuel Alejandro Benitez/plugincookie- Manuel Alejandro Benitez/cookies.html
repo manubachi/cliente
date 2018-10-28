@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cookies</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src=jquery.cookie.js></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#crea').on('click',crear);
+            $('#ver').on('click',verCookie);
+            $('#mostrar').on('click',verTodas);
+            $('#borrar').on('click',borrar);
+            $('#eliminar').on('click',borrarTodas);
+        });
+
+        function crear() {
+            if($('#nombre').val() == ''){
+                alert('No se ha creado la cookie de Nombre porque esta vacio');
+            }else {
+                $.cookie('nombre', $('#nombre').val());
+                alert('Cookie "nombre" creada');
+            }
+            if($('#dni').val() == ''){
+                alert('No se ha creado la cookie de DNI porque esta vacio');
+            }else {
+                $.cookie('dni', $('#dni').val());
+                alert('Cookie "dni" creada');
+            }
+        }
+
+        function verCookie() {
+            let c = prompt('¿Qué cookie quieres ver?');
+            c.toLowerCase();
+            if ($.cookie(c) == undefined) {
+                alert('No existe la cookie ' + c);
+            }else {
+                alert("Nombre de la cookie: " + c + "\nValor: " + $.cookie(c));
+            }
+        }
+
+        function verTodas() {
+            let array = $.cookie();
+            for (let v in array) {
+                alert($.cookie(v));
+            }
+        }
+
+        function borrar(){
+            let c = prompt('¿Qué cookie quieres borrar?');
+            if ($.cookie(c) == undefined) {
+                alert('No existe la cookie ' + c);
+            }else {
+                $.removeCookie(c);
+                alert('Cookie:' + c + ' borrada');
+            }
+        }
+
+        function borrarTodas(){
+            let array = $.cookie();
+            for (let v in array) {
+                $.removeCookie(v);
+                alert('Cookie '+ $.cookie(v) + ' borrada')
+            }
+        }
+        </script>
+    </head>
+    <body>
+        Nombre: <input type="text" id="nombre" /> <br/>
+        DNI: <input type="text" id="dni" maxlength="9"/> <br>
+        <input type="button" id="crea" value="Crear Cookie">
+        <input type="button" id="ver" value="Ver Cookie">
+        <input type="button" id="mostrar" value="Ver Todas">
+        <input type="button" id="borrar" value="Borrar Cookie">
+        <input type="button" id="eliminar" value="Eliminar Todas">
+    </body>
+</html>

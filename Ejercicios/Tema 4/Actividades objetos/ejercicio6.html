@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Actividad 6</title>
+</head>
+
+	<script type="text/javascript">
+
+		class Persona {
+			constructor(nombre,edad,genero){
+				this.nombre = nombre;
+				this.edad = edad;
+				this.genero = genero;
+			}
+
+			getNombre(){
+				return this.nombre;
+			}
+
+			getEdad(){
+				return this.edad;
+			}
+
+			getGenero(){
+				return this.genero;
+			}
+
+			obtDetalles(){
+				let resultado = "";
+				for (let i in this) {
+					if (typeof this[i] != "function") {
+						resultado +=  i + " = " + this[i] + "<br>"
+					}
+				}
+				return resultado;
+			}
+		}
+
+		class Estudiante extends Persona
+		{
+			constructor(nombre,edad,genero,curso ,grupo){
+				super(nombre,edad,genero);
+				this.curso = curso || "No registrado/a";
+				this.grupo = grupo || "No registrado/a";
+			}
+
+			getCurso(){
+				return this.curso;
+			}
+
+			getGrupo(){
+				return this.grupo;
+			}
+
+
+			registrar(curso,grupo) {
+				this.curso = curso ;
+				this.grupo = grupo ;
+				document.write(`<br/> El alumno ${this.nombre} se ha registrado/a en el
+					 curso ${this.curso} y en el grupo ${this.grupo}`);
+			}
+		}
+
+
+
+
+		class Profesor extends Persona
+		{
+			constructor(nombre,edad,genero,asignatura ,nivel){
+				super(nombre,edad,genero);
+				this.asignatura = asignatura || "No asignado/a";
+				this.nivel = nivel || "No asignado/a";
+			}
+
+			asignar(asignatura,nivel) {
+				this.asignatura = asignatura;
+				this.nivel = nivel;
+				document.write(`<br/> El profesor ${this.nombre} ha sido asignado/a en
+					la asignatura ${this.asignatura} del nivel  ${this.nivel}`);
+			}
+		}
+
+
+
+		var persona = new Persona("Luis", 23, "Masculino");
+		document.write(persona.obtDetalles() + "<hr>");
+
+		var estudiante = new Estudiante("Pedro",18,"Masculino","", "");
+		document.write(estudiante.obtDetalles() + "<hr>");
+		estudiante.registrar("SMR","1º");
+		document.write(estudiante.obtDetalles() + "<hr>");
+
+
+		var profesor = new Profesor("Rocio",32,"Femenino");
+		document.write(profesor.obtDetalles() + "<hr>");
+		profesor.asignar("PRO","1º");
+		document.write(profesor.obtDetalles() + "<hr>");
+
+	</script>
+<body>
+
+</body>
+</html>
